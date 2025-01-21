@@ -19,14 +19,10 @@ function filter(data,predicate){
 }
 //findLast: finds the last value in an array that meets the condition specified in the predicate
 function findLast(data, predicate){
-    const lastValue = [];
+    let lastValue = null;
     for (const stuff of data){
-        if (predicate(stuff))
-            if (lastValue.length >0){
-                lastValue.pop;
-                lastValue.push(stuff);
-            }else{
-                lastValue.push(stuff);
+        if (predicate(stuff)){
+            lastValue = stuff;
             }
     }
     return lastValue;
@@ -117,9 +113,25 @@ const duplicateCustomer = pairIf(customers,customers,(dc) => { //dc = D uplicate
     // if transactin > 200
         //array.push
         //return array[array.length-1]
+
+const recentTransationsOverTwoHundred = findLast(transactions,(transaction)=> {
+    return transaction.amount > 200;
+})
+
 //transaction sizes. reduce
     // T <25 = small. 25 < T < 75 = medium. T >75 = Large
     // Use reducer to check validity, (2nd parameter) 
+
+const transactionSizes = reduce(transactions, (transaction, result)=> {
+    if (transaction.amount < 25){
+        result.small ++;
+    }else if (transaction.amount <= 75){
+        result.medium ++;
+    }else {
+        result.large ++;
+    };
+    return result;       
+    },{small : 0, medium : 0, large : 0});
 
 //transactions over two hunder. pairIf, reduce, filer, map.
     /*
@@ -129,6 +141,8 @@ const duplicateCustomer = pairIf(customers,customers,(dc) => { //dc = D uplicate
     4- For this one you are allowed to use the Array.includes method, for example `accumulatedResult.includes(customer)`. It returns a true or false.
     5- Map over the reduced list to get the names of the customers 
     */
+
+const sortingCustomersWithHighTransactions = map()
 
 
 
