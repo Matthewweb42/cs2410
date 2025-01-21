@@ -164,7 +164,24 @@ const sortingCustomersWithHighTransactions = (transactions, customers) => {
         return customer ? customer.name : null;
     })
     return customerNames;
-   
+    // const customerLookup = {};
+    // for (const customer of customers) {
+    //     customerLookup[customer.id] = customer.name;
+    // }
+
+    // // Map unique customer IDs to their names
+    // const customerNames = map(uniqueCustomerID, (customerId) => {
+    //     // Check if the customer exists in the lookup map
+    //     const customerName = customerLookup[customerId];
+    //     if (customerName) {
+    //         return customerName;
+    //     } else {
+    //         console.warn(`Customer ID ${customerId} not found in lookup`);
+    //         return null; // or an empty string, depending on what you prefer
+    //     }
+    // });
+
+    // return customerNames;
 }
     
 
