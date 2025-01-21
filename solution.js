@@ -150,7 +150,7 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
 const sortingCustomersWithHighTransactions = (transactions, customers) => {
     const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
     const transactionPair = pairIf(overTwoHundred,customers, (transaction,customer) => {
-        return transaction.customerid === customer.id;
+        return transaction.customerId === customer.id;
     })
     const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
         if (!accumulatedResult.includes(pair[1].id)){
@@ -159,7 +159,7 @@ const sortingCustomersWithHighTransactions = (transactions, customers) => {
         return accumulatedResult;
     },[]);
     
-    const customerNames = map(uniqueCustomersID, (customerId) => {
+    const customerNames = map(uniqueCustomerID, (customerId) => {
         const customer = findLast(customers, (customer) => customer.id === customerId);
         return customer ? customer.name : null;
     })
