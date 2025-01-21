@@ -13,7 +13,7 @@
 function filter(data,predicate){
     const subset = [];
     for (const stuff of data){
-        if (!predicate(stuff)){
+        if (predicate(stuff)){
             subset.push(stuff);
         }
     }
@@ -84,12 +84,15 @@ function reduce(data1, reducer, initialValue){
     // single number output
 const invalidTransations = filter(transactions, (it)=>{ //it = I nvalid T ransations
     if (it.amount === 0 || it.amount === null || it.amount === undefined){
-        return false;
-    }
-    if (it.product === "FIG_JAM"||it.product === "FIG_JELLY"||
-        it.product === "SPICY_FIG_JAM"|| it.product ==="ORANGE_FIG_JELLY"){
         return true;
-        }
+    }
+    // if (it.product !== "FIG_JAM"||it.product !== "FIG_JELLY"||
+    //     it.product !== "SPICY_FIG_JAM"|| it.product !=="ORANGE_FIG_JELLY"){
+    //     return true;
+    //     }
+    if (!["FIG_JAM", "FIG_JELLY", "SPICY_FIG_JAM", "ORANGE_FIG_JELLY"].includes(it.product)) {
+        return true;  // Invalid product
+    }
     return false;
 }
 );
@@ -118,9 +121,16 @@ const recentTransationsOverTwoHundred = findLast(transactions,(transaction)=> {
     // Use reducer to check validity, (2nd parameter) 
 
 const transactionSizes = reduce(transactions, (transaction, result)=> {
+    if (transaction.amount === 0 || transaction.amount === null || transaction.amount === undefined){
+        return result;
+    }
+    if (!["FIG_JAM", "FIG_JELLY", "SPICY_FIG_JAM", "ORANGE_FIG_JELLY"].includes(transaction.product)) {
+        return result;  // Invalid product
+    }
+
     if (transaction.amount < 25){
         result.small ++;
-    }else if (transaction.amount <= 75){
+    }else if (transaction.amount < 75){
         result.medium ++;
     }else {
         result.large ++;
@@ -133,29 +143,39 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
     1- Filter the list to get only transactions over $200
     2- Pair each transaction with it's customer
     3- Reduce the pairs into a list of unique customers (this result is first required output).
-    4- For this one you are allowed to use the Array.includes method, for example `accumulatedResult.includes(customer)`. It returns a true or false.
-    5- Map over the reduced list to get the names of the customers 
+        3.5- For this one you are allowed to use the Array.includes method, for example `accumulatedResult.includes(customer)`. It returns a true or false.
+    4- Map over the reduced list to get the names of the customers 
     */
 
-const sortingCustomersWithHighTransactions = (transactions, customers) =>
-    map(
-        reduce(
-            pairIf(
-                filter()
-            )
-        )
-    )
+const sortingCustomersWithHighTransactions = (transactions, customers) => {
+    const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
+    const transactionPair = pairIf(overTwoHundred,customers, (transaction,customer) => {
+        return transaction.customerid === customer.id;
+    })
+    const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
+        if (!accumulatedResult.includes(pair[1].id)){
+            accumulatedResult.push(pair[1].id);
+        }
+        return accumulatedResult;
+    },[]);
+    
+    const customerNames = map(uniqueCustomersID, (customerId) => {
+        const customer = findLast(customers, (customer) => customer.id === customerId);
+        return customer ? customer.name : null;
+    })
+    return customerNames;
+   
+}
+    
 
 console.log("Number of invalid Transactions: "+ invalidTransations.length);
-console.log("Number of duplicate customers: " +duplicateCustomer.length);
+console.log("Number of duplicate customers: " +(duplicateCustomer.length)/2);
 console.log("Most recent transaction over $200: $" + recentTransationsOverTwoHundred.amount);
 console.log("Number of small transactions: " +transactionSizes.small);
 console.log("Number of medium transactions: " +transactionSizes.medium);
 console.log("Number of large transactions: " +transactionSizes.large);
-
-
-
-
+console.log("Customers with transactions over $200: " + sortingCustomersWithHighTransactions(transactions, customers).length);
+console.log("Names of customers with transactions over $200: ", sortingCustomersWithHighTransactions(transactions, customers));
 //customertransactionspaired
 //uniquecustomers
 //namesofcustomers
