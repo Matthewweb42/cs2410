@@ -7,6 +7,8 @@
            for which the predicate function returns true
 */
 
+
+
 //filter: returns a subset of the input data that contains only the items for which the predicate returns true
 function filter(data,predicate){
     const subset = [];
@@ -82,7 +84,7 @@ function reduce(data1, reducer, initialValue){
     // single number output
 const invalidTransations = filter(transactions, (it)=>{ //it = I nvalid T ransations
     if (it.amount === 0 || it.amount === null || it.amount === undefined){
-        return true;
+        return false;
     }
     if (it.product === "FIG_JAM"||it.product === "FIG_JELLY"||
         it.product === "SPICY_FIG_JAM"|| it.product ==="ORANGE_FIG_JELLY"){
@@ -92,22 +94,15 @@ const invalidTransations = filter(transactions, (it)=>{ //it = I nvalid T ransat
 }
 );
 
+
+
 //Duplicate customers pairif
     //if (email = email AND Id != Id) (two different people)
     // single number output
-const duplicateCustomer = pairIf(customers,customers,(dc) => { //dc = D uplicate C ustomer
-    const list1 = customers;
-    const list2 = customers;
-    for (const stuff1 of list1){
-        for (const stuff2 of list2){
-            if (dc.emailAddress[stuff1] === dc.emailAddress[stuff2]
-                 && dc.id[stuff1] !== dc.id[stuff2]){
-                    return true;
-                 }
-            return false;
-        }
-    }
-})
+const duplicateCustomer = pairIf(customers,customers,(customer1, customer2) => { 
+    return(customer1.emailAddress === customer2.emailAddress &&
+        customer1.id !== customer2.id);
+});
 
 //most recentTransactionover two hunder. findLast
     // if transactin > 200
@@ -142,10 +137,36 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
     5- Map over the reduced list to get the names of the customers 
     */
 
-const sortingCustomersWithHighTransactions = map()
+const sortingCustomersWithHighTransactions = (transactions, customers) =>
+    map(
+        reduce(
+            pairIf(
+                filter()
+            )
+        )
+    )
+
+console.log("Number of invalid Transactions: "+ invalidTransations.length);
+console.log("Number of duplicate customers: " +duplicateCustomer.length);
+console.log("Most recent transaction over $200: $" + recentTransationsOverTwoHundred.amount);
+console.log("Number of small transactions: " +transactionSizes.small);
+console.log("Number of medium transactions: " +transactionSizes.medium);
+console.log("Number of large transactions: " +transactionSizes.large);
+
 
 
 
 //customertransactionspaired
 //uniquecustomers
 //namesofcustomers
+
+ /*
+ Most recent transaction over $200: $225.57
+Number of small transactions: 1150
+Number of medium transactions: 2322
+Number of large transactions: 8315
+Customers with transactions over $200: (1417)
+[...]
+Names of customers with transactions over $200: (1417) 
+[...] 
+ */
