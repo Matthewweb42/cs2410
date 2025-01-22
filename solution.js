@@ -72,7 +72,7 @@ function pairIf(data1, data2, predicate){
 function reduce(data1, reducer, initialValue){
     let previousValue = initialValue;
     for (const stuff of data1) {
-        previousValue = reducer(stuff,previousValue)
+        previousValue = reducer(stuff, previousValue)
     }
     return previousValue;
 
