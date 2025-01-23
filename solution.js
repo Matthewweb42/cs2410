@@ -1,14 +1,4 @@
 
-
-/*
-  @data: an array of any arbitrary data
-  @predicate: a function that takes a single datapoint as an argument. Returns either true or false.
-  @return: a new array that contains all of the values in data
-           for which the predicate function returns true
-*/
-
-
-
 //filter: returns a subset of the input data that contains only the items for which the predicate returns true
 function filter(data,predicate){
     const subset = [];
@@ -40,35 +30,23 @@ function map(data, callback){
     return cbArray;
 }
 
-/*
-  pairIf: creates a new array based on the input arrays where the value at each position is an 
-          array that contains the 2 values that pair according to the predicate function.
-  @data1: an array of any arbitrary data
-  @data2: an array of any arbitrary data
-  @predicate: a function that takes a single datapoint from each input array as an argument. Returns true or false
-  @return: the newly created array of pairs
-*/
+
 function pairIf(data1, data2, predicate){
-    const pairs = [];
-    for (const stuff1 of data1){
-        for (const stuff2 of data2){
+
+    const pair = [];
+    for (let stuff1 of data1){
+        console.log(stuff1)
+        for (let stuff2 of data2){
+            //console.log(stuff2)
             if (predicate(stuff1, stuff2))
-                pairs.push([stuff1,stuff2]);
+                pair[pair.length] = [stuff1,stuff2]
+                //pair.push([stuff1,stuff2]);
         }
     }
-    return pairs;
+    return pair;
 }
 
-/*
-  reduce: creates an accumulated result based on the reducer function. The value returned is returned
-          is the return value of the reducer function for the final iteration.
-  @data: an array of any arbitrary data
-  @reducer: a function that takes a single datapoint from each input array as an
-            argument and the result of the reducer function from the previous iteration.
-            Returns the result to be passed to the next iteration
-  @initialValue: the starting point for the reduction.
-  @return: the value from the final call to the reducer function.
-*/
+
 function reduce(data1, reducer, initialValue){
     let previousValue = initialValue;
     for (const stuff of data1) {
@@ -147,50 +125,36 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
     4- Map over the reduced list to get the names of the customers 
     */
 
-const sortingCustomersWithHighTransactions = (transactions, customers) => {
-    const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
-    const transactionPair = pairIf(overTwoHundred,customers, (transaction,customer) => {
-        return transaction.customerId === customer.id;
-    })
-    // const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
-    //     if (!accumulatedResult.includes(pair[1].id)){
-    //         accumulatedResult.push(pair[1].id);
-    //     }
-    //     return accumulatedResult;
-    // },[]);
-    const uniqueCustomerID = reduce(transactionPair, (accumulatedResult, pair) => {
-        const customerId = pair[1].id; // The second element of the pair is the customer
-        if (!accumulatedResult.includes(customerId)) {
-            accumulatedResult.push(customerId);
-        }
-        return accumulatedResult;
-    }, []);
-    
-    const customerNames = map(uniqueCustomerID, (customerId) => {
-        const customer = findLast(customers, (customer) => customer.id === customerId);
-        return customer ? customer.name : null;
-    })
-    return customerNames;
-    // const customerLookup = {};
-    // for (const customer of customers) {
-    //     customerLookup[customer.id] = customer.name;
-    // }
+//const sortingCustomersWithHighTransactions = (transactions, customers) => {
 
-    // // Map unique customer IDs to their names
-    // const customerNames = map(uniqueCustomerID, (customerId) => {
-    //     // Check if the customer exists in the lookup map
-    //     const customerName = customerLookup[customerId];
-    //     if (customerName) {
-    //         return customerName;
-    //     } else {
-    //         console.warn(`Customer ID ${customerId} not found in lookup`);
-    //         return null; // or an empty string, depending on what you prefer
-    //     }
-    // });
+const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
+console.log(overTwoHundred);
 
-    // return customerNames;
-}
-    
+
+const transactionPair = pairIf(customers, overTwoHundred, (customer,transaction) => {
+    return customer.id === transaction.customerId;
+});
+console.log(overTwoHundred);
+
+console.log(transactionPair)
+// const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
+//     if (!accumulatedResult.includes(pair[1].id)){
+//         accumulatedResult.push(pair[1].id);
+//     }
+//     return accumulatedResult;
+// },[]);
+const uniqueCustomerID = reduce(transactionPair, (accumulatedResult, set) => {
+    // The second element of the pair is the customer
+    if (!accumulatedResult.includes(set[0])) {
+        accumulatedResult.push(set[0]);
+   
+    }
+    return accumulatedResult;
+}, []);
+
+const customerNames = map(uniqueCustomerID, (customer) => {
+    return ` ${customer.firstName} ${customer.lastName}`;
+})
 
 console.log("Number of invalid Transactions: "+ invalidTransations.length);
 console.log("Number of duplicate customers: " +(duplicateCustomer.length)/2);
@@ -198,8 +162,13 @@ console.log("Most recent transaction over $200: $" + recentTransationsOverTwoHun
 console.log("Number of small transactions: " +transactionSizes.small);
 console.log("Number of medium transactions: " +transactionSizes.medium);
 console.log("Number of large transactions: " +transactionSizes.large);
-console.log("Customers with transactions over $200: " + sortingCustomersWithHighTransactions(transactions, customers).length);
-console.log("Names of customers with transactions over $200: ", sortingCustomersWithHighTransactions(transactions, customers));
+
+console.log("Customers with transactions over $200: ");
+console.log(uniqueCustomerID);
+
+console.log("Names of customers with transactions over $200: ");
+console.log(customerNames);
+
 //customertransactionspaired
 //uniquecustomers
 //namesofcustomers
