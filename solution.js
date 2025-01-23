@@ -64,10 +64,6 @@ const invalidTransations = filter(transactions, (it)=>{ //it = I nvalid T ransat
     if (it.amount === 0 || it.amount === null || it.amount === undefined){
         return true;
     }
-    // if (it.product !== "FIG_JAM"||it.product !== "FIG_JELLY"||
-    //     it.product !== "SPICY_FIG_JAM"|| it.product !=="ORANGE_FIG_JELLY"){
-    //     return true;
-    //     }
     if (!["FIG_JAM", "FIG_JELLY", "SPICY_FIG_JAM", "ORANGE_FIG_JELLY"].includes(it.product)) {
         return true;  // Invalid product
     }
@@ -116,6 +112,8 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
     return result;       
     },{small : 0, medium : 0, large : 0});
 
+
+
 //transactions over two hunder. pairIf, reduce, filer, map.
     /*
     1- Filter the list to get only transactions over $200
@@ -125,7 +123,6 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
     4- Map over the reduced list to get the names of the customers 
     */
 
-//const sortingCustomersWithHighTransactions = (transactions, customers) => {
 
 const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
 console.log(overTwoHundred);
@@ -137,12 +134,7 @@ const transactionPair = pairIf(customers, overTwoHundred, (customer,transaction)
 console.log(overTwoHundred);
 
 console.log(transactionPair)
-// const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
-//     if (!accumulatedResult.includes(pair[1].id)){
-//         accumulatedResult.push(pair[1].id);
-//     }
-//     return accumulatedResult;
-// },[]);
+
 const uniqueCustomerID = reduce(transactionPair, (accumulatedResult, set) => {
     // The second element of the pair is the customer
     if (!accumulatedResult.includes(set[0])) {
@@ -169,12 +161,11 @@ console.log(uniqueCustomerID);
 console.log("Names of customers with transactions over $200: ");
 console.log(customerNames);
 
-//customertransactionspaired
-//uniquecustomers
-//namesofcustomers
 
  /*
- Most recent transaction over $200: $225.57
+Number of invalid transactions: 636
+Number of duplicate customers: 142
+Most recent transaction over $200: $225.57
 Number of small transactions: 1150
 Number of medium transactions: 2322
 Number of large transactions: 8315
