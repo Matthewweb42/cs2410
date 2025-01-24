@@ -33,14 +33,19 @@ function map(data, callback){
 
 function pairIf(data1, data2, predicate){
 
-    const pair = [];
-    for (let stuff1 of data1){
-        console.log(stuff1)
-        for (let stuff2 of data2){
+    let pair = [];
+    for (const stuff1 of data1){
+        // console.log(stuff1)
+        for (const stuff2 of data2){
             //console.log(stuff2)
-            if (predicate(stuff1, stuff2))
-                pair[pair.length] = [stuff1,stuff2]
-                //pair.push([stuff1,stuff2]);
+            if (predicate(stuff1, stuff2)) {
+                // pair[pair.length] = [stuff1,stuff2]
+                let pairList = [];
+                pairList.push(stuff1);
+                pairList.push(stuff2);
+                
+                pair.push(pairList);
+            }
         }
     }
     return pair;
@@ -124,16 +129,24 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
     */
 
 
-const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
+// const overTwoHundred = filter(transactions, (transaction) => transaction["amount"] > 200 &&  
+//     (transaction.amount !== 0 || transaction.amount !== null || transaction.amount !== undefined) ||
+//     ["FIG_JAM", "FIG_JELLY", "SPICY_FIG_JAM", "ORANGE_FIG_JELLY"].includes(transaction.product));
+
+
+const overTwoHundred = filter(transactions, data => data["amount"] >200 && (data["product"] === "FIG_JAM" || data["product"] ===  "FIG_JELLY" || data["product"] === "SPICY_FIG_JAM"|| data["product"] === "ORANGE_FIG_JELLY"));
+    // Invalid product
+// console.log(overTwoHundred);
+
+
+// const transactionPair = pairIf(overTwoHundred, customers, (customer,transaction) => {
+//     return customer["customerId"] === transaction["id"];
+// });
+
+const transactionPair = pairIf(overTwoHundred, customers, (customer, customerList) => {return (customer["customerId"] === customerList["id"])})
 console.log(overTwoHundred);
 
-
-const transactionPair = pairIf(customers, overTwoHundred, (customer,transaction) => {
-    return customer.id === transaction.customerId;
-});
-console.log(overTwoHundred);
-
-console.log(transactionPair)
+console.log(transactionPair);
 
 const uniqueCustomerID = reduce(transactionPair, (accumulatedResult, set) => {
     // The second element of the pair is the customer
