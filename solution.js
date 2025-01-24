@@ -2,9 +2,9 @@
 //filter: returns a subset of the input data that contains only the items for which the predicate returns true
 function filter(data,predicate){
     const subset = [];
-    for (const stuff of data){
-        if (predicate(stuff)){
-            subset.push(stuff);
+    for (const curData of data){
+        if (predicate(curData)){
+            subset.push(curData);
         }
     }
     return subset;
@@ -12,9 +12,9 @@ function filter(data,predicate){
 //findLast: finds the last value in an array that meets the condition specified in the predicate
 function findLast(data, predicate){
     let lastValue = null;
-    for (const stuff of data){
-        if (predicate(stuff)){
-            lastValue = stuff;
+    for (const curData of data){
+        if (predicate(curData)){
+            lastValue = curData;
             }
     }
     return lastValue;
@@ -24,8 +24,8 @@ function findLast(data, predicate){
 //position in the array is the result of the callback function.
 function map(data, callback){
     const cbArray = [];
-    for (const stuff of data){
-        cbArray.push(callback(stuff));
+    for (const curData of data){
+        cbArray.push(callback(curData));
     }
     return cbArray;
 }
@@ -34,13 +34,12 @@ function map(data, callback){
 function pairIf(data1, data2, predicate){
 
     const pair = [];
-    for (let stuff1 of data1){
-        console.log(stuff1)
-        for (let stuff2 of data2){
-            //console.log(stuff2)
-            if (predicate(stuff1, stuff2))
-                pair[pair.length] = [stuff1,stuff2]
-                //pair.push([stuff1,stuff2]);
+    for (let curData1 of data1){
+        for (let curData2 of data2){
+            //console.log(curData2)
+            if (predicate(curData1, curData2))
+                pair[pair.length] = [curData1,curData2]
+                //pair.push([curData1,curData2]);
         }
     }
     return pair;
@@ -49,8 +48,8 @@ function pairIf(data1, data2, predicate){
 
 function reduce(data1, reducer, initialValue){
     let previousValue = initialValue;
-    for (const stuff of data1) {
-        previousValue = reducer(stuff, previousValue)
+    for (const curData of data1) {
+        previousValue = reducer(curData, previousValue)
     }
     return previousValue;
 
@@ -88,7 +87,7 @@ const duplicateCustomer = pairIf(customers,customers,(customer1, customer2) => {
 //most recentTransactionover two hunder. findLast
     // if transactin > 200
         //array.push
-        //return array[array.length-1]
+        //return array
 
 const recentTransationsOverTwoHundred = findLast(transactions,(transaction)=> {
     return transaction.amount > 200;
@@ -124,19 +123,18 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
         3.5- For this one you are allowed to use the Array.includes method, for example `accumulatedResult.includes(customer)`. It returns a true or false.
     4- Map over the reduced list to get the names of the customers 
     */
-
 //const sortingCustomersWithHighTransactions = (transactions, customers) => {
 
 const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
-console.log(overTwoHundred);
+//console.log(overTwoHundred);
 
 
 const transactionPair = pairIf(customers, overTwoHundred, (customer,transaction) => {
     return customer.id === transaction.customerId;
 });
-console.log(overTwoHundred);
+//console.log(overTwoHundred);
 
-console.log(transactionPair)
+//console.log(transactionPair);
 // const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
 //     if (!accumulatedResult.includes(pair[1].id)){
 //         accumulatedResult.push(pair[1].id);
@@ -147,7 +145,6 @@ const uniqueCustomerID = reduce(transactionPair, (accumulatedResult, set) => {
     // The second element of the pair is the customer
     if (!accumulatedResult.includes(set[0])) {
         accumulatedResult.push(set[0]);
-   
     }
     return accumulatedResult;
 }, []);
@@ -174,7 +171,9 @@ console.log(customerNames);
 //namesofcustomers
 
  /*
- Most recent transaction over $200: $225.57
+Number of invalid transactions: 636
+Number of duplicate customers: 142
+Most recent transaction over $200: $225.57
 Number of small transactions: 1150
 Number of medium transactions: 2322
 Number of large transactions: 8315
