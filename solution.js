@@ -1,10 +1,10 @@
 
 //filter: returns a subset of the input data that contains only the items for which the predicate returns true
 function filter(data,predicate){
-    const subset = [];
-    for (const curData of data){
-        if (predicate(curData)){
-            subset.push(curData);
+    let subset = [];
+    for (const stuff of data){
+        if (predicate(stuff)){
+            subset.push(stuff);
         }
     }
     return subset;
@@ -12,9 +12,9 @@ function filter(data,predicate){
 //findLast: finds the last value in an array that meets the condition specified in the predicate
 function findLast(data, predicate){
     let lastValue = null;
-    for (const curData of data){
-        if (predicate(curData)){
-            lastValue = curData;
+    for (const stuff of data){
+        if (predicate(stuff)){
+            lastValue = stuff;
             }
     }
     return lastValue;
@@ -24,8 +24,8 @@ function findLast(data, predicate){
 //position in the array is the result of the callback function.
 function map(data, callback){
     const cbArray = [];
-    for (const curData of data){
-        cbArray.push(callback(curData));
+    for (const stuff of data){
+        cbArray.push(callback(stuff));
     }
     return cbArray;
 }
@@ -34,25 +34,24 @@ function map(data, callback){
 function pairIf(data1, data2, predicate){
 
     const pair = [];
-    for (let curData1 of data1){
-        for (let curData2 of data2){
-            //console.log(curData2)
-            if (predicate(curData1, curData2))
-                pair[pair.length] = [curData1,curData2]
-                //pair.push([curData1,curData2]);
+    for (const stuff1 of data1){
+        for (const stuff2 of data2){
+            if (predicate(stuff1, stuff2)) {
+                pair[pair.length] = Object.freeze([stuff1, stuff2])
+
+            }
         }
     }
+
     return pair;
 }
 
-
 function reduce(data1, reducer, initialValue){
     let previousValue = initialValue;
-    for (const curData of data1) {
-        previousValue = reducer(curData, previousValue)
+    for (const stuff of data1) {
+        previousValue = reducer(previousValue, stuff)
     }
-    return previousValue;
-
+    return previousValue;   
 }
 
 //invalid transations: filter
@@ -63,18 +62,12 @@ const invalidTransations = filter(transactions, (it)=>{ //it = I nvalid T ransat
     if (it.amount === 0 || it.amount === null || it.amount === undefined){
         return true;
     }
-    // if (it.product !== "FIG_JAM"||it.product !== "FIG_JELLY"||
-    //     it.product !== "SPICY_FIG_JAM"|| it.product !=="ORANGE_FIG_JELLY"){
-    //     return true;
-    //     }
     if (!["FIG_JAM", "FIG_JELLY", "SPICY_FIG_JAM", "ORANGE_FIG_JELLY"].includes(it.product)) {
         return true;  // Invalid product
     }
     return false;
 }
 );
-
-
 
 //Duplicate customers pairif
     //if (email = email AND Id != Id) (two different people)
@@ -87,7 +80,6 @@ const duplicateCustomer = pairIf(customers,customers,(customer1, customer2) => {
 //most recentTransactionover two hunder. findLast
     // if transactin > 200
         //array.push
-        //return array
 
 const recentTransationsOverTwoHundred = findLast(transactions,(transaction)=> {
     return transaction.amount > 200;
@@ -97,7 +89,7 @@ const recentTransationsOverTwoHundred = findLast(transactions,(transaction)=> {
     // T <25 = small. 25 < T < 75 = medium. T >75 = Large
     // Use reducer to check validity, (2nd parameter) 
 
-const transactionSizes = reduce(transactions, (transaction, result)=> {
+const transactionSizes = reduce(transactions, (result, transaction)=> {
     if (transaction.amount === 0 || transaction.amount === null || transaction.amount === undefined){
         return result;
     }
@@ -113,7 +105,10 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
         result.large ++;
     };
     return result;       
-    },{small : 0, medium : 0, large : 0});
+},
+    {small : 0, medium : 0, large : 0}
+);
+
 
 //transactions over two hunder. pairIf, reduce, filer, map.
     /*
@@ -123,31 +118,20 @@ const transactionSizes = reduce(transactions, (transaction, result)=> {
         3.5- For this one you are allowed to use the Array.includes method, for example `accumulatedResult.includes(customer)`. It returns a true or false.
     4- Map over the reduced list to get the names of the customers 
     */
-//const sortingCustomersWithHighTransactions = (transactions, customers) => {
+const overTwoHundred = filter(transactions, data => data["amount"] >200 && (data["product"] === "FIG_JAM" || data["product"] ===  "FIG_JELLY" || data["product"] === "SPICY_FIG_JAM"|| data["product"] === "ORANGE_FIG_JELLY"));
 
-const overTwoHundred = filter(transactions, (transaction) => transaction.amount > 200);
-//console.log(overTwoHundred);
+const transactionPair = pairIf(overTwoHundred, customers, (customer, customerList) => {return (customer["customerId"] === customerList["id"])})
 
-
-const transactionPair = pairIf(overTwoHundred, customers, (transaction,customer) => {
-    return transaction.customerId === customer.id;
-});
-//console.log(overTwoHundred);
-
-//console.log(transactionPair);
-// const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
-//     if (!accumulatedResult.includes(pair[1].id)){
-//         accumulatedResult.push(pair[1].id);
-//     }
-//     return accumulatedResult;
-// },[]);
-const uniqueCustomerID = reduce(transactionPair, (accumulatedResult, pair) => {
-    // The second element of the pair is the customer
-    if (!accumulatedResult.some(customer => customer.id === pair[1].id)) {
-        accumulatedResult.push(pair[1]);
-    }
-    return accumulatedResult;
-}, []);
+const uniqueCustomerID = reduce(
+    transactionPair,
+    (accumulatedResult, set) => {
+        if (!accumulatedResult.includes(set[1])) {
+            return [...accumulatedResult, set[1]]; // Return a new array instead of mutating
+        }
+        return accumulatedResult; // No changes if the element is already included
+    },
+    []
+);
 
 const customerNames = map(uniqueCustomerID, (customer) => {
     return ` ${customer.firstName} ${customer.lastName}`;
@@ -166,10 +150,7 @@ console.log(uniqueCustomerID);
 console.log("Names of customers with transactions over $200: ");
 console.log(customerNames);
 
-//customertransactionspaired
-//uniquecustomers
-//namesofcustomers
-
+//Correct Output
  /*
 Number of invalid transactions: 636
 Number of duplicate customers: 142
