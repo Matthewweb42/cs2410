@@ -132,9 +132,9 @@ const overTwoHundred = filter(transactions, (transaction) => transaction.amount 
 const transactionPair = pairIf(customers, overTwoHundred, (customer,transaction) => {
     return customer.id === transaction.customerId;
 });
-//console.log(overTwoHundred);
+console.log(overTwoHundred);
 
-//console.log(transactionPair);
+console.log(transactionPair);
 // const uniqueCustomerID = reduce(transactionPair,(pair,accumulatedResult) => {
 //     if (!accumulatedResult.includes(pair[1].id)){
 //         accumulatedResult.push(pair[1].id);
