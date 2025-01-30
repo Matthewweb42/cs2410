@@ -26,6 +26,15 @@ If the user deletes the value from one of the fields and blurs the field, rather
 should just re-populate the field with the original default value and perform the calculation.
 */
 
+const loanAmountField = document.getElementById("loanAmount"); 
+const yearlyInterestRateField = document.getElementById("yearlyInterestRate"); 
+const loanTermField = document.getElementById("loanTerm"); 
 
 
+function calculateMorgage(){
+    console.log(document.getElementById("loanAmount").value);
+}
 
+loanAmountField.addEventListener("blur", calculateMorgage());
+yearlyInterestRateField.addEventListener("blur", calculateMorgage());
+loanTermField.addEventListener("blur", calculateMorgage());
