@@ -28,8 +28,9 @@ method call in the js file.
 Do not user an html form
 */
 
-document.getElementById("madlib-form").addEventListener("submit", function (event) {
+document.getElementById("Madlib").addEventListener("submit", function (event) {
     event.preventDefault();
+
     const noun1 = document.getElementById("noun1").value; //nouns, adjectives etc
     const noun2 = document.getElementById("noun2").value; 
     const adjective1 = document.getElementById("adjective1").value; 
@@ -42,17 +43,18 @@ document.getElementById("madlib-form").addEventListener("submit", function (even
     //if statement checking that all inputs are present
     if (!noun1  || !noun2 || !adjective1 || !adjective2  || !adverb1 || !adverb2  || !verb1  || !verb2 ){
         alert("Please fill in all the inputs");
-    }
-            //const story = " WRITE THE STORY"
-    const story = "Once upon a time, there was a " + noun1 + " who was very " + adjective1 + 
-    ". This " + noun1 + " was always " + adverb1 + " " + verb1 + " and " + adverb2 + " " + verb2 +
-    ". One day, the " + noun1 + " met a " + noun2 + " who was also very " + adjective2 + 
-    ". The two of them became best friends and lived happily ever after. Until they didn't when "
-    + noun1 + " killed " + noun2 + " with bad documentation on their cs homework. The end."
+    }else{
 
-    document.getElementById("story").innerText = story;
+        //const story = " WRITE THE STORY"
+        const story = "Once upon a time, there was a " + noun1 + " who was very " + adjective1 + 
+        ". This " + noun1 + " was always " + adverb1 + " " + verb1 + " and " + adverb2 + " " + verb2 +
+        ". One day, the " + noun1 + " met a " + noun2 + " who was also very " + adjective2 + 
+        ". The two of them became best friends and lived happily ever after. Until they didn't when "
+        + noun1 + " killed " + noun2 + " with bad documentation on their cs homework. The end."
+        document.getElementById("story").innerHTML = story;
+    }
     
-    });
+});
 
 
 
