@@ -26,15 +26,38 @@ If the user deletes the value from one of the fields and blurs the field, rather
 should just re-populate the field with the original default value and perform the calculation.
 */
 
+
 const loanAmountField = document.getElementById("loanAmount"); 
 const yearlyInterestRateField = document.getElementById("yearlyInterestRate"); 
 const loanTermField = document.getElementById("loanTerm"); 
+const result = document.getElementById("result");
 
 
 function calculateMorgage(){
-    console.log(document.getElementById("loanAmount").value);
+    let loanAmount = parseFloat(loanAmountField.value);
+    let yearlyInterestRate = parseFloat(yearlyInterestRateField.value);
+    let loanTerm = parseFloat(loanTermField.value);
+    if (!loanAmount){
+        loanAmount = 10000;
+    }else if (!yearlyInterestRate){
+        yearlyInterestRate = 0.05;
+    }else if (!loanTerm){
+        loanTerm = 30;
+    }
+
+    if (Number.isNaN(loanAmount) || Number.isNaN(yearlyInterestRate) || Number.isNaN(loanTerm)){
+        result.innerHTML = "An error occurred";
+    }
+    //Formula got off the internet. I'm pretty sure it's a correct formula. 
+    const mortgagePayment = (loanAmount * (yearlyInterestRate / 12)) / (1 - Math.pow(1 + (yearlyInterestRate / 12), -loanTerm * 12));
+    console.log(mortgagePayment);
+
+    if (Number.isNaN(mortgagePayment)){
+        result.innerHTML = "An error occurred";
+    }else(result.innerHTML = "Your monthly mortgage is: $"+ mortgagePayment);
 }
 
-loanAmountField.addEventListener("blur", calculateMorgage());
-yearlyInterestRateField.addEventListener("blur", calculateMorgage());
-loanTermField.addEventListener("blur", calculateMorgage());
+calculateMorgage();
+loanAmountField.addEventListener("blur", calculateMorgage);
+yearlyInterestRateField.addEventListener("blur", calculateMorgage);
+loanTermField.addEventListener("blur", calculateMorgage);
