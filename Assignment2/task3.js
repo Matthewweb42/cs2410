@@ -39,22 +39,21 @@ function calculateMorgage(){
     let loanTerm = parseFloat(loanTermField.value);
     if (!loanAmount){
         loanAmount = 10000;
-    }else if (!yearlyInterestRate){
+    }if (!yearlyInterestRate){
         yearlyInterestRate = 0.05;
-    }else if (!loanTerm){
+    }if (!loanTerm){
         loanTerm = 30;
     }
-
-    if (Number.isNaN(loanAmount) || Number.isNaN(yearlyInterestRate) || Number.isNaN(loanTerm)){
+    if (Number.isNaN(loanAmount) || Number.isNaN(yearlyInterestRate) || Number.isNaN(loanTerm) || loanAmount < 0 || yearlyInterestRate < 0 || loanTerm < 0){
         result.innerHTML = "An error occurred";
+    }else{
+            const mortgagePayment = (loanAmount * (yearlyInterestRate / 12)) / (1 - Math.pow(1 + (yearlyInterestRate / 12), -loanTerm * 12));
+        if (Number.isNaN(mortgagePayment)){
+            result.innerHTML = "An error occurred";
+        }else(result.innerHTML = "Your monthly mortgage is: $"+ mortgagePayment);
     }
     //Formula got off the internet. I'm pretty sure it's a correct formula. 
-    const mortgagePayment = (loanAmount * (yearlyInterestRate / 12)) / (1 - Math.pow(1 + (yearlyInterestRate / 12), -loanTerm * 12));
-    console.log(mortgagePayment);
 
-    if (Number.isNaN(mortgagePayment)){
-        result.innerHTML = "An error occurred";
-    }else(result.innerHTML = "Your monthly mortgage is: $"+ mortgagePayment);
 }
 
 calculateMorgage();
