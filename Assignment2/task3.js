@@ -49,11 +49,7 @@ function calculateMorgage(){
         result.innerHTML = "An error occurred";
     }
     //Formula got off the internet. I'm pretty sure it's a correct formula. 
-    // const mortgagePayment = (loanAmount * (yearlyInterestRate / 12)) / (1 - Math.pow(1 + (yearlyInterestRate / 12), -loanTerm * 12));
-    let r = yearlyInterestRate / 12 / 100;
-    let n = loanTerm*12;
-    let P = loanAmount // Convert annual rate to monthly decimal
-    const mortgagePayment = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    const mortgagePayment = (loanAmount * (yearlyInterestRate / 12)) / (1 - Math.pow(1 + (yearlyInterestRate / 12), -loanTerm * 12));
     console.log(mortgagePayment);
 
     if (Number.isNaN(mortgagePayment)){
