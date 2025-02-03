@@ -39,10 +39,12 @@ document.getElementById("Madlib").addEventListener("submit", function (event) {
     const adverb2 = document.getElementById("adverb2").value; 
     const verb1 = document.getElementById("verb1").value; 
     const verb2 = document.getElementById("verb2").value;
+    const result = document.getElementById("result");
+
 
     //if statement checking that all inputs are present
     if (!noun1  || !noun2 || !adjective1 || !adjective2  || !adverb1 || !adverb2  || !verb1  || !verb2 ){
-        alert("Please fill in all the inputs");
+        result.innerHTML = "Error: Please fill in all the inputs";
     }else{
 
         //const story = " WRITE THE STORY"
@@ -51,6 +53,8 @@ document.getElementById("Madlib").addEventListener("submit", function (event) {
         ". One day, the " + noun1 + " met a " + noun2 + " who was also very " + adjective2 + 
         ". The two of them became best friends and lived happily ever after. Until they didn't when "
         + noun1 + " killed " + noun2 + " with bad documentation on their cs homework. The end."
+        result.innerHTML = "";
+
         document.getElementById("story").innerHTML = story;
     }
     
