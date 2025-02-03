@@ -47,12 +47,12 @@ function calculateMorgage(){
     if (Number.isNaN(loanAmount) || Number.isNaN(yearlyInterestRate) || Number.isNaN(loanTerm) || loanAmount < 0 || yearlyInterestRate < 0 || loanTerm < 0){
         result.innerHTML = "An error occurred";
     }else{
+            //Formula got off the internet. I'm pretty sure it's a correct formula. 
             const mortgagePayment = (loanAmount * (yearlyInterestRate / 12)) / (1 - Math.pow(1 + (yearlyInterestRate / 12), -loanTerm * 12));
         if (Number.isNaN(mortgagePayment)){
             result.innerHTML = "An error occurred";
-        }else(result.innerHTML = "Your monthly mortgage is: $"+ mortgagePayment);
+        }else(result.innerHTML = "Your monthly mortgage is: $"+ mortgagePayment.toFixed(2));
     }
-    //Formula got off the internet. I'm pretty sure it's a correct formula. 
 
 }
 
