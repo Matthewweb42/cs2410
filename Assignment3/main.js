@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // orderSoFar.appendChild(orderSummary);
 
     // Object to store selected items
+
+
+    // Link it to objects, change to order.sandwich etc or order.sides toka
+    
+
+
     let order = {
         size: null,
         bread: null,
@@ -40,12 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function(event) {
             event.preventDefault(); // Prevent form submission on button clicks
             button.classList.toggle("active");
-
-            if (button.name == "side"){
+            if (button.name == "sides"){
                 console.log("SIDE LOOP")
                 sides.push(button.innerHTML);
                 order.sides = sides}
-            else if (button.name == "topping"){
+            else if (button.name == "toppings"){
                 console.log("TOPPING LOOP")
                 toppings.push(button.innerHTML);
                 order.toppings = toppings;}
