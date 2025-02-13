@@ -51,6 +51,11 @@ button:hover {
     background-color: #0d550e;
 }
 
+.active {
+    background-color: #f8f9fa;
+    color: #0d550e;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -88,7 +93,7 @@ button:hover {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    text-align: center;
+    text-align: left;
 }
 
 
@@ -96,9 +101,51 @@ button:hover {
 .right-side {
     flex: 1; /* Takes 50% width */
     flex-direction: column;
-    background-color: lightcoral;
+    background-color: rgb(101, 204, 252);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.New-Orders{
+    background-color: rgb(40, 255, 129);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex: 1; /* Takes 50% width */
+    flex-direction: row;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.Waiting{
+    background-color: rgb(255, 255, 0);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex: 1; /* Takes 50% width */
+    flex-direction: row;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.Hurry-Up{
+    background-color: rgb(255, 0, 0);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex: 1; /* Takes 50% width */
+    flex-direction: row;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
 }
