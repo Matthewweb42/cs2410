@@ -1,0 +1,90 @@
+/* Every html element should have some css applied
+font size, background color, margin, padding, borders.
+You don't need to apply everything to every element
+
+The status areas should have backgrounds/headers of different colors. 
+This means the first column might be green, the middle, yellow, and the 
+left, red. The actual order card should be a set color (like white) with
+ the background of the column it is in being a set color. */
+
+
+ /* Style for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+/* Styling the heading */
+h1 {
+    color: #000000;
+}
+
+/* Styling paragraphs */
+p {
+    font-size: 18px;
+    color: #242e1f;
+}
+
+/* Styling the button */
+button {
+    background-color: #008CBA;
+    flex-direction: row;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005f73;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Left side styling */
+.left-side {
+    flex: 1; /* Takes 50% width */
+    flex-direction: column;
+    background-color: rgb(203, 231, 222);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.order-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+.order-so-far {
+    background-color: lightgreen;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+
+/* Right side styling */
+.right-side {
+    flex: 1; /* Takes 50% width */
+    flex-direction: column;
+    background-color: lightcoral;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

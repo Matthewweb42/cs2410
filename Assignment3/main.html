@@ -1,0 +1,82 @@
+Must use a form for the ordering area, with a button associated
+with the form to submit.
+
+Must use a table in the status area
+(Hint: It might work best with one header row, and only one regular row)
+
+Must have a title in the head section
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sooubway Sandwiches</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <form>
+        <div class="container">
+            <div class="left-side">
+                <h1>Create a Sandwich!</h1>
+
+                <div class="buttons">
+                    <h2>Size</h2>
+                    <button id="Small">Small</button>
+                    <button id="Medium">Medium</button>
+                    <button id="Large">Large</button>
+
+                    <h2>Bread</h2>
+                    <button id="White">White</button>
+                    <button id="Wheat">Wheat</button>
+                    <button id="Italian">Italian</button>
+
+                    <h2>Meat</h2>
+                    <button id="Turkey">Turkey</button>
+                    <button id="Ham">Ham</button>
+                    <button id="Roast Beef">Roast Beef</button>
+
+                    <h2>Cheese</h2>
+                    <button id="American">American</button>
+                    <button id="Swiss">Swiss</button>
+                    <button id="Provolone">Provolone</button>
+
+                    <h2>Toppings</h2>
+                    <button id="Lettuce">Lettuce</button>
+
+                    <h2>Drink</h2>
+                    <button id="Coke">Coke</button>
+                    <button id="Pepsi">Pepsi</button>
+                    <button id="Dr. Pepper">Dr. Pepper</button>
+
+                    <h2>Sides</h2>
+                    <button id="Chips">Chips</button>
+
+                </div>
+                <div class="Order-so-far">
+                    <h2>Order so far...</h2>
+                    <p>Size: </p>
+                    <p>Bread: </p>
+                    <p>Meat: </p>
+                    <p>Cheese: </p>
+                    <p>Toppings: </p>
+                    <p>Drink: </p>
+                    <p>Sides: </p>
+                </div>
+            </div>
+    </form>
+    <div class="container">
+
+        <div class="right-side">
+            <h2>Right Side</h2>
+            <p>This is the right panel.</p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
