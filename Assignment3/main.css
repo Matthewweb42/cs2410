@@ -12,12 +12,19 @@ left, red. The actual order card should be a set color (like white) with
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    text-align: center;
+    text-align: flex-start;
 }
 
 /* Styling the heading */
 h1 {
     color: #000000;
+    flex-direction: row;
+}
+
+h2 {
+    color: #000000;
+    font-size: 24px;
+    flex-direction: row;
 }
 
 /* Styling paragraphs */
@@ -28,7 +35,7 @@ p {
 
 /* Styling the button */
 button {
-    background-color: #008CBA;
+    background-color: #17a853;
     flex-direction: row;
     color: white;
     padding: 10px 20px;
@@ -36,16 +43,19 @@ button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    flex-wrap: wrap;
+    gap: 1px;
 }
 
 button:hover {
-    background-color: #005f73;
+    background-color: #0d550e;
 }
 
 .container {
     display: flex;
     flex-direction: row;
-    height: 100vh; /* Full viewport height */
+    justify-content: space-between;
+    height: 150vh; /* Full viewport height */
 }
 
 /* Left side styling */
@@ -68,13 +78,17 @@ button:hover {
 }
 
 .order-so-far {
-    background-color: lightgreen;
+    background-color: rgb(167, 228, 167);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 10px;
+    flex: 1; /* Takes 50% width */
     flex-direction: row;
+    display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
+    text-align: center;
 }
 
 
