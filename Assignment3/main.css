@@ -25,12 +25,14 @@ h2 {
     color: #000000;
     font-size: 24px;
     flex-direction: row;
+    margin-right: 10px;
 }
 
 /* Styling paragraphs */
 p {
-    font-size: 18px;
+    font-size: 24px;
     color: #242e1f;
+    line-height: .9;
 }
 
 /* Styling the button */

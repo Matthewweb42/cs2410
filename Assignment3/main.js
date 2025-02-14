@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Link it to objects, change to order.sandwich etc or order.sides toka
-    
+
 
 
     let order = {
@@ -27,14 +27,16 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("HIIIIII");
         console.log(order);
         orderPreview.innerHTML = `
-            <h2>Order so far...</h2>
-            <h2><strong> Size: </strong> ${order.size || "None"}</h2>
-            <p><strong> Bread: </strong> ${order.bread || "None"}</p>
-            <p><strong> Meat: </strong> ${order.meat || "None"}</p>
-            <p><strong> Cheese: </strong> ${order.cheese || "None"}</p>
-            <p><strong> Toppings: </strong> ${order.toppings || "None"}</p>
-            <p><strong> Drink: </strong> ${order.drink || "None"}</p>
-            <p><strong> Side: </strong> ${order.sides || "None"}</p>
+            <h2>Order so far: </h2>
+            <p>
+                <strong>Size:</strong> ${order.size || "None"} | 
+                <strong>Bread:</strong> ${order.bread || "None"} | 
+                <strong>Meat:</strong> ${order.meat || "None"} | 
+                <strong>Cheese:</strong> ${order.cheese || "None"} | 
+                <strong>Toppings:</strong> ${order.toppings || "None"} | 
+                <strong>Drink:</strong> ${order.drink || "None"} | 
+                <strong>Side:</strong> ${order.sides || "None"}
+            </p>
         `;
     }
 
@@ -43,17 +45,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const sides = [];
     const toppings = [];
     document.querySelectorAll(".multiple button").forEach(button => {
-        button.addEventListener("click", function(event) {
+        button.addEventListener("click", function (event) {
             event.preventDefault(); // Prevent form submission on button clicks
             button.classList.toggle("active");
-            if (button.name == "sides"){
+            if (button.name == "sides") {
                 console.log("SIDE LOOP")
                 sides.push(button.innerHTML);
-                order.sides = sides}
-            else if (button.name == "toppings"){
+                order.sides = sides
+            }
+            else if (button.name == "toppings") {
                 console.log("TOPPING LOOP")
                 toppings.push(button.innerHTML);
-                order.toppings = toppings;}
+                order.toppings = toppings;
+            }
             updateOrderPreview();
         });
     });
@@ -62,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const buttons = group.querySelectorAll("button");
 
         buttons.forEach(button => {
-            button.addEventListener("click", function(event) {
+            button.addEventListener("click", function (event) {
                 event.preventDefault(); // Prevent form submission on button clicks
                 buttons.forEach(btn => btn.classList.remove("active"));
                 // Add active class to the clicked button
@@ -82,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 updateOrderPreview();
             });
         });
-        });
     });
+});
 
-    
+
