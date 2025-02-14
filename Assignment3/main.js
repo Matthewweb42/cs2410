@@ -28,13 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(order);
         orderPreview.innerHTML = `
             <h2>Order so far...</h2>
-            <p><strong>Size:</strong> ${order.size || "None"}</p>
-            <p><strong>Bread:</strong> ${order.bread || "None"}</p>
-            <p><strong>Meat:</strong> ${order.meat || "None"}</p>
-            <p><strong>Cheese:</strong> ${order.cheese || "None"}</p>
-            <p><strong>Toppings:</strong> ${order.toppings || "None"}</p>
-            <p><strong>Drink:</strong> ${order.drink || "None"}</p>
-            <p><strong>Side:</strong> ${order.sides || "None"}</p>
+            <h2><strong> Size: </strong> ${order.size || "None"}</h2>
+            <p><strong> Bread: </strong> ${order.bread || "None"}</p>
+            <p><strong> Meat: </strong> ${order.meat || "None"}</p>
+            <p><strong> Cheese: </strong> ${order.cheese || "None"}</p>
+            <p><strong> Toppings: </strong> ${order.toppings || "None"}</p>
+            <p><strong> Drink: </strong> ${order.drink || "None"}</p>
+            <p><strong> Side: </strong> ${order.sides || "None"}</p>
         `;
     }
 
