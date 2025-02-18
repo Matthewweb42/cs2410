@@ -1,3 +1,4 @@
+
 class Order {
     constructor() {
         this.sandwich = new Sandwich();
@@ -12,13 +13,14 @@ class Order {
     }
 
     addTopping(topping) {
-        this.sandwich.addTopping(new Toppings(topping));
+        this.sandwich.toppings.push(topping);
+        if (this.sandwich.toppings.contains(topping)) {
+        }
     }
 
     updateOrderPreview() {
         const orderPreview = document.getElementById("preview");
         console.log("HIIIIII");
-        console.log(order);
         orderPreview.innerHTML = `
             <h2>Order so far: </h2>
             <p>
@@ -26,9 +28,9 @@ class Order {
                 <strong>Bread:</strong> ${this.sandwich.bread || "None"} | 
                 <strong>Meat:</strong> ${this.sandwich.meat || "None"} | 
                 <strong>Cheese:</strong> ${this.sandwich.cheese || "None"} | 
-                <strong>Toppings:</strong> ${this.sandwich.toppings || "None"} | 
+                <strong>Toppings:</strong> ${this.sandwich.toppings.join(", ") || "None"} | 
                 <strong>Drink:</strong> ${this.drink.type || "None"} | 
-                <strong>Side:</strong> ${this.sides || "None"}
+                <strong>Side:</strong> ${this.sides.map(side => side.type).join(", ") || "None"}
             </p>
         `;
     }

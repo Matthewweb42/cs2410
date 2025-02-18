@@ -1,5 +1,5 @@
 class Sandwich {
-    constructor(size, bread, meat, cheese, toppings = []) {
+    constructor(size = null, bread= null, meat= null, cheese= null, toppings = []) {
         this.size = size;
         this.bread = bread;
         this.meat = meat;

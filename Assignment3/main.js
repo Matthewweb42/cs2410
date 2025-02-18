@@ -26,16 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Toppings and Sides
-    const sides = [];
-    const toppings = [];
+    // const sides = [];
+    // const toppings = [];
     document.querySelectorAll(".multiple button").forEach(button => {
         button.addEventListener("click", function (event) {
             event.preventDefault(); // Prevent form submission on button clicks
             button.classList.toggle("active");
+            console.log("Active TEST"); 
             if (button.name == "sides") {
                 order.addSide(button.innerHTML)
-            }
-            else if (button.name == "toppings") {
+            }else if (button.name == "toppings") {
                 order.addTopping(button.innerHTML)
             }
             order.updateOrderPreview();
@@ -51,18 +51,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 buttons.forEach(btn => btn.classList.remove("active"));
                 // Add active class to the clicked button
                 this.classList.add("active");
-                if (button.classList.contains("active"))
-                    if (button.name == "meat")
-                        order.meat = button.innerHTML;
-                    else if (button.name == "cheese")
-                        order.cheese = button.innerHTML;
-                    else if (button.name == "bread")
-                        order.bread = button.innerHTML;
-                    else if (button.name == "size")
-                        order.size = button.innerHTML;
-                    else if (button.name == "drink")
+                if (button.classList.contains("active")){
+                    if (button.name == "meat"){
+                        order.sandwich.meat = button.innerHTML;
+                    }else if (button.name == "cheese"){
+                        order.sandwich.cheese = button.innerHTML;
+                    }else if (button.name == "bread"){
+                        order.sandwich.bread = button.innerHTML;
+                    }else if (button.name == "size"){
+                        order.sandwich.size = button.innerHTML;
+                    }else if (button.name == "drink"){
                         order.drink = button.innerHTML;
-
+                    }          
+                }
                 order.updateOrderPreview();
             });
         });
