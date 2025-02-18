@@ -11,34 +11,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    let order = {
-        size: null,
-        bread: null,
-        meat: null,
-        cheese: null,
-        toppings: [],
-        drink: null,
-        sides: [],
-    };
+    // let order = {
+    //     size: null,
+    //     bread: null,
+    //     meat: null,
+    //     cheese: null,
+    //     toppings: [],
+    //     drink: null,
+    //     sides: [],
+    // };
 
 
-    function updateOrderPreview() {
-        const orderPreview = document.getElementById("preview");
-        console.log("HIIIIII");
-        console.log(order);
-        orderPreview.innerHTML = `
-            <h2>Order so far: </h2>
-            <p>
-                <strong>Size:</strong> ${order.size || "None"} | 
-                <strong>Bread:</strong> ${order.bread || "None"} | 
-                <strong>Meat:</strong> ${order.meat || "None"} | 
-                <strong>Cheese:</strong> ${order.cheese || "None"} | 
-                <strong>Toppings:</strong> ${order.toppings || "None"} | 
-                <strong>Drink:</strong> ${order.drink || "None"} | 
-                <strong>Side:</strong> ${order.sides || "None"}
-            </p>
-        `;
-    }
+    let order = new Order();
 
 
     // Toppings and Sides
@@ -49,16 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault(); // Prevent form submission on button clicks
             button.classList.toggle("active");
             if (button.name == "sides") {
-                console.log("SIDE LOOP")
-                sides.push(button.innerHTML);
-                order.sides = sides
+                order.addSide(button.innerHTML)
             }
             else if (button.name == "toppings") {
-                console.log("TOPPING LOOP")
-                toppings.push(button.innerHTML);
-                order.toppings = toppings;
+                order.addTopping(button.innerHTML)
             }
-            updateOrderPreview();
+            order.updateOrderPreview();
         });
     });
     // Size, Bread, Meat, Cheese, and Drink
@@ -83,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     else if (button.name == "drink")
                         order.drink = button.innerHTML;
 
-                updateOrderPreview();
+                order.updateOrderPreview();
             });
         });
     });
