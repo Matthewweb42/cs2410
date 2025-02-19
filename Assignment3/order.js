@@ -4,8 +4,7 @@ class Order {
         this.drink = new Drink();
         this.sides = [];
         this.createTime = new Date();
-        // this.createdTime = new Date();
-        // this.status = "Pending"; // Status: Pending → In Progress → Completed
+
     }
 
     addSide(side) {
@@ -38,7 +37,7 @@ class Order {
                 <strong>Meat:</strong> ${this.sandwich.meat || "None"} | 
                 <strong>Cheese:</strong> ${this.sandwich.cheese || "None"} | 
                 <strong>Toppings:</strong> ${this.sandwich.toppings.join(", ") || "None"} | 
-                <strong>Drink:</strong> ${this.drink || "None"} | 
+                <strong>Drink:</strong> ${this.drink.type || "None"} | 
                 <strong>Side:</strong> ${this.sides.map(side => side.type).join(", ") || "None"}
             </p>
         `;
@@ -46,18 +45,20 @@ class Order {
 
     toHTMLElement() {
         const orderElement = document.createElement("div");
-        orderElement.classList.add("order-item");
+        orderElement.classList.add("order-card");
+        const orderNumber = Math.floor(Math.random() * 1000);
+        const orderTime = this.createTime.toLocaleTimeString();
         orderElement.innerHTML = `
-            <h3>Order Details:</h3>
-            <p><strong>Size:</strong> ${this.sandwich.size || "None"}</p>
-            <p><strong>Bread:</strong> ${this.sandwich.bread || "None"}</p>
-            <p><strong>Meat:</strong> ${this.sandwich.meat || "None"}</p>
-            <p><strong>Cheese:</strong> ${this.sandwich.cheese || "None"}</p>
-            <p><strong>Toppings:</strong> ${this.sandwich.toppings.join(", ") || "None"}</p>
-            <p><strong>Drink:</strong> ${this.drink.type || "None"}</p>
-            <p><strong>Sides:</strong> ${this.sides.map(side => side.type).join(", ") || "None"}</p>
-        `;
+            <h3>Order ${orderNumber} | Ordered at ${orderTime}: </h3> <h4>Sandwich ${this.drink.type || ""} ${this.sides.map(side => side.type).join(", ") || ""}</h4>
+             `;
+        orderElement.addEventListener("dblclick", () => {
+            this.completedTime = new Date();
+            const duration = Math.round((this.completedTime - this.createTime) / 1000);
+            orderElement.innerHTML += `<h4> Completed in: ${duration} seconds</h4>`;
+            const completedOrders = document.querySelector(".completed");
+            completedOrders.prepend(orderElement);
+        });
         return orderElement;
-    }
 
+}
 }

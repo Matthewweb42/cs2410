@@ -75,11 +75,20 @@ button:hover {
 }
 
 .right-side {
-    background-color: rgb(101, 204, 252);
+    background-color: rgb(173, 223, 214);
+}
+
+
+
+.error-message{
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+    display: none;
 }
 
 /* Card Styling */
-.order-card, .order-so-far, .New-Orders, .Waiting, .Hurry-Up {
+.order-card, .order-so-far, .New-Orders, .Waiting, .Hurry-Up, .completed {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -91,9 +100,19 @@ button:hover {
     text-align: left;
 }
 
+
 /* Specific Background Colors */
+
+
 .order-card {
     background-color: white;
+    padding: 10px;
+    border: 2px solid #000; 
+    margin-bottom: 10px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+
 }
 
 .order-so-far {
@@ -101,14 +120,20 @@ button:hover {
 }
 
 .New-Orders {
-    background-color: rgb(40, 255, 129);
+    background-color: rgb(100, 231, 155);
 }
 
 .Waiting {
-    background-color: rgb(255, 255, 0);
+    background-color: rgb(230, 230, 75);
 }
 
 .Hurry-Up {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(219, 56, 56);
 }
 
+.completed {
+    max-height: 200px; 
+    overflow-y: auto; 
+    background-color: #00d9e9; 
+    flex-direction: column;
+}

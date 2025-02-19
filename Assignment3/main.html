@@ -96,12 +96,13 @@ Must have a title in the head section
             </div>
             <hr>
             <button type="submit">Submit Order</button>
+            <div id="error-message" class="error-message"></div>
         </div>
     </div>
     </form>
     <div class="container">
         <div class="right-side">
-            <h2>Right Side</h2>
+            <h2>Employee Side</h2>
             <div class="New-Orders">
                 <h2>New Orders</h2>
                 <hr> 
@@ -121,7 +122,20 @@ Must have a title in the head section
                 <table>
                     <thead>
                         <tr>
-                            <th>Order</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Orders will be appended here -->
+                    </tbody>
+                </table>    
+            </div>
+            <div class="Hurry-Up">
+                <h2>Hurry Up!</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,18 +143,11 @@ Must have a title in the head section
                     </tbody>
                 </table>
             </div>
-            <div class="Hurry-Up">
-                <h2>Hurry Up!</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Orders will be appended here -->
-                    </tbody>
-                </table>
+            <div class="Completed-Orders">
+                <h2>Completed Orders</h2>
+                <div class="completed">
+                    <!-- Complete Orders will be appended here -->
+                </div>
             </div>
         </div>
     </div>

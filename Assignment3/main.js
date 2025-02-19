@@ -1,10 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     let order = new Order();
 
-
-    // Toppings and Sides
-    // const sides = [];
-    // const toppings = [];
     console.log(document.querySelectorAll(".multiple button"))
     document.querySelectorAll(".multiple button").forEach(button => {
         button.addEventListener("click", function (event) {
@@ -27,8 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
             button.addEventListener("click", function (event) {
                 event.preventDefault(); 
                 buttons.forEach(btn => btn.classList.remove("active"));
-                // Add active class to the clicked button
-                console.log("Active TEST2222");
                 this.classList.add("active");
                 if (button.classList.contains("active")){
                     if (button.name == "meat"){
@@ -40,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }else if (button.name == "size"){
                         order.sandwich.size = button.innerHTML;
                     }else if (button.name == "drink"){
-                        order.drink = button.innerHTML;
+                        order.drink.type = button.innerHTML;
                     }          
                 }
                 order.updateOrderPreview();
@@ -50,6 +44,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const orderForm = document.getElementById("order-form");
     orderForm.addEventListener("submit", (event)=>{
         event.preventDefault();
+
+        const errorMessage = document.getElementById("error-message");
+        if (!order.sandwich.size || !order.sandwich.bread || !order.sandwich.meat || !order.sandwich.cheese || !order.drink){
+            errorMessage.innerHTML = "Please select a size, bread, meat, and one kind of cheese.";
+            errorMessage.style.display = "block";
+            return;
+        }else{
+            errorMessage.style.display = "none";
+        }
+
         
         const newOrdersSection = document.querySelector(".New-Orders tbody");
         const orderElement = order.toHTMLElement();
@@ -60,12 +64,18 @@ document.addEventListener("DOMContentLoaded", function () {
         newOrdersSection.appendChild(orderRow);
 
         //time stuff
+        setTimeout(() => {
+            document.querySelector(".Waiting tbody").appendChild(orderRow);
+        }, 60000);
+
+        setTimeout(() => {
+            document.querySelector(".Hurry-Up tbody").appendChild(orderRow);
+        }, 90000);
 
         orderForm.reset();
-        order52 = new Order();
+        order = new Order();
         document.querySelectorAll(".single button, .multiple button").forEach(button => button.classList.remove("active"));
-        order52.updateOrderPreview();
-        console.log('ORDER FORM SUBMIT EVENT LISTENER')
+        order.updateOrderPreview();
     });
 
     
