@@ -1,36 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // const orderForm = document.getElementById("order-form");
-    // const orderSoFar = document.querySelector(".Order-so-far");
-    // const orderSummary = document.createElement("ul");
-    // orderSoFar.appendChild(orderSummary);
-
-    // Object to store selected items
-
-
-    // Link it to objects, change to order.sandwich etc or order.sides toka
-
-
-
-    // let order = {
-    //     size: null,
-    //     bread: null,
-    //     meat: null,
-    //     cheese: null,
-    //     toppings: [],
-    //     drink: null,
-    //     sides: [],
-    // };
-
-
     let order = new Order();
 
 
     // Toppings and Sides
     // const sides = [];
     // const toppings = [];
+    console.log(document.querySelectorAll(".multiple button"))
     document.querySelectorAll(".multiple button").forEach(button => {
         button.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent form submission on button clicks
+            event.preventDefault(); 
             button.classList.toggle("active");
             console.log("Active TEST"); 
             if (button.name == "sides") {
@@ -47,9 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         buttons.forEach(button => {
             button.addEventListener("click", function (event) {
-                event.preventDefault(); // Prevent form submission on button clicks
+                event.preventDefault(); 
                 buttons.forEach(btn => btn.classList.remove("active"));
                 // Add active class to the clicked button
+                console.log("Active TEST2222");
                 this.classList.add("active");
                 if (button.classList.contains("active")){
                     if (button.name == "meat"){
@@ -68,6 +47,28 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
-});
+    const orderForm = document.getElementById("order-form");
+    orderForm.addEventListener("submit", (event)=>{
+        event.preventDefault();
+        
+        const newOrdersSection = document.querySelector(".New-Orders tbody");
+        const orderElement = order.toHTMLElement();
+        const orderRow = document.createElement("tr");
+        const orderCell = document.createElement("td");
+        orderCell.appendChild(orderElement);
+        orderRow.appendChild(orderCell);
+        newOrdersSection.appendChild(orderRow);
+
+        //time stuff
+
+        orderForm.reset();
+        order52 = new Order();
+        document.querySelectorAll(".single button, .multiple button").forEach(button => button.classList.remove("active"));
+        order52.updateOrderPreview();
+        console.log('ORDER FORM SUBMIT EVENT LISTENER')
+    });
+
+    
+ });
 
 

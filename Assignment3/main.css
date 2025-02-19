@@ -9,44 +9,38 @@ left, red. The actual order card should be a set color (like white) with
 
 
  /* Style for the entire page */
-body {
+ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    text-align: flex-start;
 }
 
-/* Styling the heading */
-h1 {
-    color: #000000;
+/* Headings */
+h1, h2 {
+    color: #000;
     flex-direction: row;
 }
 
 h2 {
-    color: #000000;
     font-size: 24px;
-    flex-direction: row;
     margin-right: 10px;
 }
 
-/* Styling paragraphs */
+/* Paragraphs */
 p {
     font-size: 24px;
     color: #242e1f;
-    line-height: .9;
+    line-height: 0.9;
 }
 
-/* Styling the button */
+/* Buttons */
 button {
     background-color: #17a853;
-    flex-direction: row;
     color: white;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    flex-wrap: wrap;
-    gap: 1px;
 }
 
 button:hover {
@@ -58,96 +52,63 @@ button:hover {
     color: #0d550e;
 }
 
+/* Layout */
 .container {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     height: 150vh; /* Full viewport height */
 }
 
-/* Left side styling */
-.left-side {
-    flex: 1; /* Takes 50% width */
-    flex-direction: column;
-    background-color: rgb(203, 231, 222);
+/* Common styling for both sides */
+.left-side, .right-side {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-.order-card {
-    background-color: white;
+/* Background colors */
+.left-side {
+    background-color: rgb(203, 231, 222);
+}
+
+.right-side {
+    background-color: rgb(101, 204, 252);
+}
+
+/* Card Styling */
+.order-card, .order-so-far, .New-Orders, .Waiting, .Hurry-Up {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* Specific Background Colors */
+.order-card {
+    background-color: white;
 }
 
 .order-so-far {
     background-color: rgb(167, 228, 167);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    flex: .25; /* Takes 50% width */
-    flex-direction: row;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
 }
 
-
-/* Right side styling */
-.right-side {
-    flex: 1; /* Takes 50% width */
-    flex-direction: column;
-    background-color: rgb(101, 204, 252);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.New-Orders{
+.New-Orders {
     background-color: rgb(40, 255, 129);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    flex: 1; /* Takes 50% width */
-    flex-direction: row;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
 }
 
-.Waiting{
+.Waiting {
     background-color: rgb(255, 255, 0);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    flex: 1; /* Takes 50% width */
-    flex-direction: row;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
 }
 
-.Hurry-Up{
+.Hurry-Up {
     background-color: rgb(255, 0, 0);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    flex: 1; /* Takes 50% width */
-    flex-direction: row;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
 }
+
