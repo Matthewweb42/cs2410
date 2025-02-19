@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     let order = new Order();
 
-    console.log(document.querySelectorAll(".multiple button"))
+    //Click for sides and toppings
     document.querySelectorAll(".multiple button").forEach(button => {
         button.addEventListener("click", function (event) {
             event.preventDefault(); 
             button.classList.toggle("active");
-            console.log("Active TEST"); 
             if (button.name == "sides") {
                 order.addSide(button.innerHTML)
             }else if (button.name == "toppings") {
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             order.updateOrderPreview();
         });
     });
-    // Size, Bread, Meat, Cheese, and Drink
+    //Click for Size, Bread, Meat, Cheese, and Drink
     document.querySelectorAll(".single").forEach(group => {
         const buttons = group.querySelectorAll("button");
 
@@ -41,10 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
+    //Click for Submit Order
     const orderForm = document.getElementById("order-form");
     orderForm.addEventListener("submit", (event)=>{
         event.preventDefault();
 
+
+        //Error Handling
         const errorMessage = document.getElementById("error-message");
         if (!order.sandwich.size || !order.sandwich.bread || !order.sandwich.meat || !order.sandwich.cheese || !order.drink){
             errorMessage.innerHTML = "Please select a size, bread, meat, and one kind of cheese.";
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             errorMessage.style.display = "none";
         }
 
-        
+        //Table Stuff, New Orders to htlmElements
         const newOrdersSection = document.querySelector(".New-Orders tbody");
         const orderElement = order.toHTMLElement();
         const orderRow = document.createElement("tr");
@@ -63,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         orderRow.appendChild(orderCell);
         newOrdersSection.appendChild(orderRow);
 
-        //time stuff
+        //timer stuff
         setTimeout(() => {
             document.querySelector(".Waiting tbody").appendChild(orderRow);
         }, 60000);
@@ -72,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".Hurry-Up tbody").appendChild(orderRow);
         }, 90000);
 
+        //Reset Form
         orderForm.reset();
         order = new Order();
         document.querySelectorAll(".single button, .multiple button").forEach(button => button.classList.remove("active"));

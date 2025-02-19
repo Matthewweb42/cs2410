@@ -25,7 +25,7 @@ class Order {
         }
     }
 
-
+    //Updates the order preview window
     updateOrderPreview() {
         const orderPreview = document.getElementById("preview");
         console.log("Order Test");
@@ -43,6 +43,7 @@ class Order {
         `;
     }
 
+    //Converts the preview to an order card
     toHTMLElement() {
         let startTime = Date.now();
         const orderElement = document.createElement("div");
@@ -52,6 +53,8 @@ class Order {
         orderElement.innerHTML = `
             <h3>Order ${orderNumber} | ${orderTime} | </h3> <h4> | Sandwich ${this.drink.type || ""} ${this.sides.map(side => side.type).join(", ") || ""} | </h4>
              `;
+            
+        //Complete Order Button
         orderElement.addEventListener("dblclick", () => {
             let endTime = Date.now();
             const duration = Math.round((endTime - startTime) / 1000);
