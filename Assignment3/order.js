@@ -44,17 +44,18 @@ class Order {
     }
 
     toHTMLElement() {
+        let startTime = Date.now();
         const orderElement = document.createElement("div");
         orderElement.classList.add("order-card");
         const orderNumber = Math.floor(Math.random() * 1000);
         const orderTime = this.createTime.toLocaleTimeString();
         orderElement.innerHTML = `
-            <h3>Order ${orderNumber} | Ordered at ${orderTime}: </h3> <h4>Sandwich ${this.drink.type || ""} ${this.sides.map(side => side.type).join(", ") || ""}</h4>
+            <h3>Order ${orderNumber} | ${orderTime} | </h3> <h4> | Sandwich ${this.drink.type || ""} ${this.sides.map(side => side.type).join(", ") || ""} | </h4>
              `;
         orderElement.addEventListener("dblclick", () => {
-            this.completedTime = new Date();
-            const duration = Math.round((this.completedTime - this.createTime) / 1000);
-            orderElement.innerHTML += `<h4> Completed in: ${duration} seconds</h4>`;
+            let endTime = Date.now();
+            const duration = Math.round((endTime - startTime) / 1000);
+            orderElement.innerHTML += `<h4>| Completed in: ${duration} seconds</h4>`;
             const completedOrders = document.querySelector(".completed");
             completedOrders.prepend(orderElement);
         });
