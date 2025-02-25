@@ -16,6 +16,12 @@ document.getElementById('skillsBtn').addEventListener('click', function() {
 
 createContactInfoForm();
 createEducationForm();
+createWorkExperienceForm();
+createSkillsForm();
+
+document.getElementById('educationEntry').addEventListener('click', function() {
+    console.log("HELLOW");
+})
 
 function showSection(sectionId) {
     const sections = document.querySelectorAll('main > section');
@@ -58,7 +64,7 @@ function createEducationForm(){
             <input type="degree" id="degree" name="degree" required>
             <label for="fieldOfStudy">Field of Study:</label>
             <input type="text" id="fieldOfStudy" name="fieldOfStudy" required>
-            <button type-"newEntry">New Entry</button>
+            <button id="educationEntry" type="newEntry">New Entry</button>
         </form>
     `;
 }
@@ -85,5 +91,21 @@ function createWorkExperienceForm(){
     `;
 }
 
+function createSkillsForm(){
+    const section = document.getElementById(`skillsSection`);
+    section.innerHTML = `
+        <form>
+            <button type="deleteEntry">Delete Last</button>
+            <label for="skillName">Skill Name:</label>
+            <input type="text" id="jobTitle" name="jobTitle" required>
+            <select id="skillDropDown" name="options">
+                <option value="novice">Novice</option>
+                <option value="novice">Proficient</option>
+                <option value="novice">Expert</option>
+            </select>
+            <button type="newEntry">New Entry</button>
+        </form>
+    `
+    
+}   
 
-// Add more JavaScript as needed

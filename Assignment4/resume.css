@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #675e5e;
     color: white;
     padding: 10px 0;
     position: fixed;
@@ -26,7 +26,7 @@ nav h1 {
 }
 
 nav button {
-    background-color: #555;
+    background-color: #2d2c2c;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -34,16 +34,23 @@ nav button {
 }
 
 nav button:hover {
-    background-color: #777;
+    background-color: #4b4a4a;
 }
 
 main {
+    display: flex;
     margin-top: 60px;
+    margin-bottom: 3000px;
     padding: 20px;
+    justify-content: space-around;
+    align-items: center;
+    
 }
 
 .hidden {
     display: none;
 }
+
+
 
 /* Add more styles as needed */

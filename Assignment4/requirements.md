@@ -61,6 +61,9 @@
   - Dropdown Options: Novice, Proficient, Expert
 - Add button to create the new entry in the Skills section of the resume
 
+------------------------
+
+
 ## Contact Info
 - Include a profile picture. Does not have to be editable (can include the image file in your program)
 - Appropriate sizing and organization
