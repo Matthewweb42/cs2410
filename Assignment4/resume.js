@@ -50,16 +50,6 @@ function createContactInfoForm(){
         </form>
     `;
 
-    const resume = document.getElementById('resume');
-    resume.innerHTML = `
-        <form>
-            <img src="dinosaur.jpg" alt="Dinosaur" />
-            <p id="nameOutput">Name: </p>
-            <p id="addressOutput">Address: </p>
-            <p id="emailOutput">Email: </p>
-            <p id="phoneOutput">Phone: </p>
-        </form>
-    `
       document.getElementById("name").addEventListener("input", function() {
         document.getElementById("nameOutput").textContent = this.value;
       });
