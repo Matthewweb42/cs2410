@@ -1,30 +1,31 @@
 document.getElementById('contactInfoBtn').addEventListener('click', function() {
     showSection('contactInfoSection');
+    createContactInfoForm();
+
 });
 
 document.getElementById('educationBtn').addEventListener('click', function() {
     showSection('educationSection');
+    createEducationForm();
 });
 
 document.getElementById('workExperienceBtn').addEventListener('click', function() {
     showSection('workExperienceSection');
+    createWorkExperienceForm();
 });
 
 document.getElementById('skillsBtn').addEventListener('click', function() {
     showSection('skillsSection');
+    createSkillsForm();
 });
 
-createContactInfoForm();
-createEducationForm();
-createWorkExperienceForm();
-createSkillsForm();
 
 document.getElementById('educationEntry').addEventListener('click', function() {
     console.log("HELLOW");
 })
 
 function showSection(sectionId) {
-    const sections = document.querySelectorAll('main > section');
+    const sections = document.querySelectorAll('#inputSection > section');
     sections.forEach(section => {
         if (section.id === sectionId) {
             section.classList.remove('hidden');
@@ -41,14 +42,38 @@ function createContactInfoForm(){
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <label for="address">Address:</label>
-            <input type="text" id="" name="address" required>
+            <input type="text" id="address" name="address" required>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             <label for="phone">Phone:</label>
             <input type="tel" id="phone" name="phone" required>
         </form>
     `;
+
+    const resume = document.getElementById('resume');
+    resume.innerHTML = `
+        <form>
+            <img src="dinosaur.jpg" alt="Dinosaur" />
+            <p id="nameOutput">Name: </p>
+            <p id="addressOutput">Address: </p>
+            <p id="emailOutput">Email: </p>
+            <p id="phoneOutput">Phone: </p>
+        </form>
+    `
+      document.getElementById("name").addEventListener("input", function() {
+        document.getElementById("nameOutput").textContent = this.value;
+      });
+      document.getElementById("address").addEventListener("input", function() {
+        document.getElementById("addressOutput").textContent = this.value;
+      });
+      document.getElementById("email").addEventListener("input", function() {
+        document.getElementById("emailOutput").textContent = this.value;
+      });
+      document.getElementById("phone").addEventListener("input", function() {
+        document.getElementById("phoneOutput").textContent = this.value;
+      });
 }
+    
 
 function createEducationForm(){
     const section = document.getElementById('educationSection');
@@ -106,6 +131,7 @@ function createSkillsForm(){
             <button type="newEntry">New Entry</button>
         </form>
     `
+    
     
 }   
 
