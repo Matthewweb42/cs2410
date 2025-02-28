@@ -82,6 +82,21 @@ function createEducationForm(){
             <button id="educationEntry" type="newEntry">New Entry</button>
         </form>
     `;
+    document.getElementById("schoolLogo").addEventListener("input", function() {
+        document.getElementById("schoolLogoOutput").textContent = this.value;
+      });
+      document.getElementById("schoolName").addEventListener("input", function() {
+        document.getElementById("schoolNameOutput").textContent = this.value;
+      });
+      document.getElementById("graduationDate").addEventListener("input", function() {
+        document.getElementById("graduationDateOutput").textContent = this.value;
+      });
+      document.getElementById("degree").addEventListener("input", function() {
+        document.getElementById("degreeOutput").textContent = this.value;
+      });
+      document.getElementById("fieldOfStudy").addEventListener("input", function() {
+        document.getElementById("fieldOfStudyOutput").textContent = this.value;
+      });
 }
 
 function createWorkExperienceForm(){
