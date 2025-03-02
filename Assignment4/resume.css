@@ -1,24 +1,33 @@
 body {
+    display: flex;
     font-family: Arial, sans-serif;
     background-color: rgb(10, 10, 10);
-    margin: 0;
-    padding: 0;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 header {
+    flex-direction: row;
     background-color: rgb(163, 138, 30);
     color: white;
-    padding: 20px 0;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
+    z-index: 10;
+    height: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 nav {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    padding: 25px 20px;
 }
 
 nav h1 {
@@ -29,7 +38,7 @@ nav button {
     background-color: #2d2c2c;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 30px;
     cursor: pointer;
     margin: 0 10px;
 }
@@ -40,14 +49,16 @@ nav button:hover {
 
 main {
     display: flex;
-    margin-top: 150px;
     /* margin-bottom: 3000px; */
     padding: 20px;
     height: 100vh;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
-    background: radial-gradient(circle, rgb(20, 20, 20) 40%, rgb(150, 120, 30) 80%, rgb(207, 181, 59) 100%);
+    background-color: #2d2c2c;
+    
+    width: 100%;
+    /* background: radial-gradient(circle, rgb(20, 20, 20) 40%, rgb(150, 120, 30) 80%, rgb(207, 181, 59) 100%); */
 
 
 }
@@ -61,20 +72,19 @@ main {
     padding: 20px 0;
     position: fixed;
     width: 100%;
-    top: 70px;
-    height: 20px;
-    z-index: 1000;
+    top: 100px;
+    height: 30px;
+    gap: 20px;
+    z-index: 1;
 }
 
-.resume{
+#resume{
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
-    height: 500px;
-    overflow-y: auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    top: 130px;
     width: 100%;
-    background-color: rgb(203, 30, 30);
     padding: 20px;
     margin-bottom: 20px;
 }
@@ -82,9 +92,9 @@ main {
 #contactInfo, #educationInfo, #workExperienceInfo, #skillsInfo{ 
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-    color: rgb(163, 138, 30)
+    justify-content: center;
+    align-items: center;
+    color: rgb(163, 138, 30);
 }
 
 
