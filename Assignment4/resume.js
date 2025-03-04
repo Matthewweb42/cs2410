@@ -7,6 +7,7 @@ document.getElementById('contactInfoBtn').addEventListener('click', function() {
 document.getElementById('educationBtn').addEventListener('click', function() {
     showSection('educationSection');
     createEducationForm();
+
 });
 
 document.getElementById('workExperienceBtn').addEventListener('click', function() {
@@ -20,9 +21,9 @@ document.getElementById('skillsBtn').addEventListener('click', function() {
 });
 
 
-document.getElementById('educationEntry').addEventListener('click', function() {
-    console.log("HELLOW");
-})
+
+
+
 
 function showSection(sectionId) {
     const sections = document.querySelectorAll('#inputSection > section');
@@ -79,7 +80,7 @@ function createEducationForm(){
             <input type="degree" id="degree" name="degree" required>
             <label for="fieldOfStudy">Field of Study:</label>
             <input type="text" id="fieldOfStudy" name="fieldOfStudy" required>
-            <button id="educationEntry" type="newEntry">New Entry</button>
+            <button id="educationEntry" class="nested-button" type="newEntry">New Entry</button>
         </form>
     `;
     document.getElementById("schoolLogo").addEventListener("input", function() {
@@ -97,13 +98,16 @@ function createEducationForm(){
       document.getElementById("fieldOfStudy").addEventListener("input", function() {
         document.getElementById("fieldOfStudyOutput").textContent = this.value;
       });
+      document.querySelector('.nested-button').addEventListener('click', function() {
+        console.log("education Entry");
+    })
 }
 
 function createWorkExperienceForm(){
     const section = document.getElementById('workExperienceSection');
     section.innerHTML = `
         <form>
-            <button type="deleteEntry">Delete Last</button>
+            <button type="deleteEntry" class="nested-button1" >Delete Last</button>
             <label for="companyName">Company Name:</label>
             <input type="text" id="companyName" name="companyName" required>
             <label for="jobTitle">Job Title:</label>
@@ -114,29 +118,84 @@ function createWorkExperienceForm(){
             <input type="date" id="endDate" name="endDate" placeholder="Present">
             <label for="respnsibilities">Responsibilities:</label>
             <textarea id="responsibilities" name="responsibilities" required></textarea>
-            <button type="newEntry">New Entry</button>
+            <button type="jobEntry" class="nested-button2" >New Entry</button>
 
         </form>
         
     `;
+
+    document.getElementById("companyName").addEventListener("input", function() {
+        document.getElementById("companyOutput").textContent = this.value;
+    });
+    document.getElementById("jobTitle").addEventListener("input", function() {
+        document.getElementById("positionOutput").textContent = this.value;
+    });
+    document.getElementById("startDate").addEventListener("input", function() {
+        document.getElementById("startOutput").textContent = this.value;
+    });
+    document.getElementById("endDate").addEventListener("input", function() {
+        document.getElementById("endOutput").textContent = this.value;
+    });
+    document.getElementById("responsibilities").addEventListener("input", function() {
+        document.getElementById("tasksOutput").textContent = this.value;
+    });
+
+    document.querySelector('.nested-button1').addEventListener('click', function() {
+        console.log("Job Deletion");
+
+    });
+    document.querySelector('.nested-button2').addEventListener('click', function() {
+        console.log("Job Entry");
+
+    });
 }
 
 function createSkillsForm(){
     const section = document.getElementById(`skillsSection`);
     section.innerHTML = `
         <form>
-            <button type="deleteEntry">Delete Last</button>
-            <label for="skillName">Skill Name:</label>
-            <input type="text" id="jobTitle" name="jobTitle" required>
-            <select id="skillDropDown" name="options">
-                <option value="novice">Novice</option>
-                <option value="novice">Proficient</option>
-                <option value="novice">Expert</option>
-            </select>
-            <button type="newEntry">New Entry</button>
+            <button type="button" class="nested-button1">Delete Last</button>
+            <div class="form-group">
+                <label for="skillName">Skill Name:</label>
+                <input type="text" id="skillName" name="skillName" required>
+            </div>
+            <div class="form-group">
+                <label for="skillDropDown">Proficiency:</label>
+                <select id="skillDropDown" name="options">
+                    <option value="novice">Novice</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expert">Expert</option>
+                </select>
+            </div>
+            <button type="button" class="nested-button2">Insert Skill</button>
         </form>
-    `
-    
-    
-}   
+    `;
 
+    document.querySelector('.nested-button1').addEventListener('click', function(event) {
+        console.log("Skill Deletion");
+    });
+    document.querySelector('.nested-button2').addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log("Skill Entry");
+        const skillName = document.getElementById('skillName').value;
+        const skillProficiency = document.getElementById('skillDropDown').value;
+
+        const skillsInfo = document.getElementById('skillsInfo');
+        const newSkill = document.createElement('div');
+        newSkill.classList.add('info-group');
+        newSkill.innerHTML = `
+            <p>${skillName}</p>
+            <p>${skillProficiency}</p>
+        `;
+        skillsInfo.appendChild(newSkill);
+
+    });
+
+    document.getElementById("skillName").addEventListener("input", function() {
+        document.getElementById("skill1Output").textContent = this.value;
+    });
+    document.getElementById("skillDropDown").addEventListener("input", function() {
+        document.getElementById("proficiencyOutput").textContent = this.value;
+    });
+    
+}
