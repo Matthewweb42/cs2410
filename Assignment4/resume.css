@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    background-color: rgb(163, 138, 30);
+    background-color: rgb(174, 149, 34);
     color: white;
     padding: 20px 0;
     position: fixed;
@@ -56,7 +56,8 @@ main {
     justify-content: flex-start;
     width: 100%;
     padding: 20px;
-    margin-top: 180px; /* Adjust this value to create space for the fixed sections */
+    height: 350%;
+    margin-top: 180px; 
     background-color: #2d2c2c;
 }
 
@@ -92,12 +93,16 @@ main {
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    width: 100%;
+    width: 90%;
     padding: 20px;
+    margin-top: 50px;
+    margin-right: 20px;
     margin-bottom: 20px;
-    background-color: rgb(163, 138, 30);
+    background-color: rgb(184, 163, 43);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    top: 320px;
+    position: relative;
 }
 
 #contactInfo, #educationInfo, #workExperienceInfo, #skillsInfo {
@@ -105,11 +110,11 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    width: 100%;
+    width: 98%;
     padding: 10px;
     margin-bottom: 20px;
     background: radial-gradient(circle, rgb(90, 90, 90), rgb(30, 30, 30));
-    color: #f9f9f9;
+    color: rgb(255, 255, 255);
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -117,6 +122,13 @@ main {
 #contactInfo img {
     max-width: 100px;
     border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.info-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 10px;
 }
 
@@ -135,5 +147,7 @@ form {
 .hidden {
     display: none;
 }
+
+
 
 /* Add more styles as needed */
