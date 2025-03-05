@@ -97,11 +97,9 @@ function createEducationForm(){
         newEducation.classList.add('education-card');
         newEducation.innerHTML = `
             <div class="info-group">
-                <label for="schoolLogoOutput">School Logo:</label>
-                <p id="schoolLogoOutput">${schoolLogo}</p>
+                <img id="schoolLogoOutput" src="${schoolLogo}" alt="School Logo" />
             </div>
             <div class="info-group">
-                <label for="schoolNameOutput">School Name:</label>
                 <p id="schoolNameOutput">${schoolName}</p>
             </div>
             <div class="info-group">
@@ -109,11 +107,9 @@ function createEducationForm(){
                 <p id="graduationDateOutput">${graduationDate}</p>
             </div>
             <div class="info-group">
-                <label for="degreeOutput">Degree:</label>
                 <p id="degreeOutput">${degree}</p>
             </div>
             <div class="info-group">
-                <label for="fieldOfStudyOutput">Field of Study:</label>
                 <p id="fieldOfStudyOutput">${fieldOfStudy}</p>
             </div>
         `;
