@@ -83,26 +83,54 @@ function createEducationForm(){
             <button id="educationEntry" class="nested-button" type="newEntry">New Entry</button>
         </form>
     `;
-    document.getElementById("schoolLogo").addEventListener("input", function() {
-        document.getElementById("schoolLogoOutput").textContent = this.value;
-      });
-      document.getElementById("schoolName").addEventListener("input", function() {
-        document.getElementById("schoolNameOutput").textContent = this.value;
-      });
-      document.getElementById("graduationDate").addEventListener("input", function() {
-        document.getElementById("graduationDateOutput").textContent = this.value;
-      });
-      document.getElementById("degree").addEventListener("input", function() {
-        document.getElementById("degreeOutput").textContent = this.value;
-      });
-      document.getElementById("fieldOfStudy").addEventListener("input", function() {
-        document.getElementById("fieldOfStudyOutput").textContent = this.value;
-      });
-      document.querySelector('.nested-button').addEventListener('click', function() {
-        console.log("education Entry");
-    })
+
+      document.querySelector('.nested-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        const schoolLogo = document.getElementById('schoolLogo').value;
+        const schoolName = document.getElementById('schoolName').value;
+        const graduationDate = document.getElementById('graduationDate').value;
+        const degree = document.getElementById('degree').value;
+        const fieldOfStudy = document.getElementById('fieldOfStudy').value;
+
+        const educationContainer = document.getElementById('educationContainer');
+        const newEducation = document.createElement('div');
+        newEducation.classList.add('education-card');
+        newEducation.innerHTML = `
+            <div class="info-group">
+                <label for="schoolLogoOutput">School Logo:</label>
+                <p id="schoolLogoOutput">${schoolLogo}</p>
+            </div>
+            <div class="info-group">
+                <label for="schoolNameOutput">School Name:</label>
+                <p id="schoolNameOutput">${schoolName}</p>
+            </div>
+            <div class="info-group">
+                <label for="graduationDateOutput">Graduation Date:</label>
+                <p id="graduationDateOutput">${graduationDate}</p>
+            </div>
+            <div class="info-group">
+                <label for="degreeOutput">Degree:</label>
+                <p id="degreeOutput">${degree}</p>
+            </div>
+            <div class="info-group">
+                <label for="fieldOfStudyOutput">Field of Study:</label>
+                <p id="fieldOfStudyOutput">${fieldOfStudy}</p>
+            </div>
+        `;
+        newEducation.addEventListener('click', function() {
+            educationContainer.removeChild(newEducation);
+        });
+        educationContainer.appendChild(newEducation);
+    });
+    
 }
 
+const existingCards = document.querySelectorAll('.education-card');
+existingCards.forEach(card => {
+    card.addEventListener('click', function() {
+        card.parentElement.removeChild(card);
+    });
+});
 function createWorkExperienceForm(){
     const section = document.getElementById('workExperienceSection');
     section.innerHTML = `
@@ -174,7 +202,6 @@ function createSkillsForm(){
     document.querySelector('.nested-button1').addEventListener('click', function(event) {
         event.preventDefault();
         const skillsInfo = document.getElementById('skillsContainer');
-        console.log(skillsInfo.lastElementChild);
         if (skillsInfo.lastElementChild) {
             skillsInfo.removeChild(skillsInfo.lastElementChild);
         }

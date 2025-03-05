@@ -119,10 +119,42 @@ main {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+#educationInfo {
+    align-items: center;
+}
+
+
+#educationContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.education-card{
+    display: flex;
+    background-color: rgb(184, 163, 43);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #contactInfo img {
     max-width: 100px;
     border-radius: 50%;
     margin-bottom: 10px;
+}
+
+#schoolLogo{
+    max-width: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 .info-group {
