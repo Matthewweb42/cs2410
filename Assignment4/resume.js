@@ -172,7 +172,12 @@ function createSkillsForm(){
     `;
 
     document.querySelector('.nested-button1').addEventListener('click', function(event) {
-        console.log("Skill Deletion");
+        event.preventDefault();
+        const skillsInfo = document.getElementById('skillsContainer');
+        console.log(skillsInfo.lastElementChild);
+        if (skillsInfo.lastElementChild) {
+            skillsInfo.removeChild(skillsInfo.lastElementChild);
+        }
     });
     document.querySelector('.nested-button2').addEventListener('click', function(event) {
         event.preventDefault();
@@ -191,11 +196,5 @@ function createSkillsForm(){
 
     });
 
-    document.getElementById("skillName").addEventListener("input", function() {
-        document.getElementById("skill1Output").textContent = this.value;
-    });
-    document.getElementById("skillDropDown").addEventListener("input", function() {
-        document.getElementById("proficiencyOutput").textContent = this.value;
-    });
     
 }
