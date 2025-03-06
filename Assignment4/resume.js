@@ -71,7 +71,7 @@ function createEducationForm(){
     section.innerHTML = `
         <form>
             <label for="schoolLogo">School Logo:</label>
-            <input type="url" id="schoolLogo" name="schoolLogo">
+            <input type="url" id="schoolLogoInput" name="schoolLogo">
             <label for="schoolName">School Name:</label>
             <input type="text" id="schoolName" name="schoolName" required>
             <label for="graduationDate">Graduation Date:</label>
@@ -86,7 +86,7 @@ function createEducationForm(){
 
       document.querySelector('.nested-button').addEventListener('click', function(event) {
         event.preventDefault();
-        const schoolLogo = document.getElementById('schoolLogo').value;
+        const schoolLogo = document.getElementById('schoolLogoInput').value;
         const schoolName = document.getElementById('schoolName').value;
         const graduationDate = document.getElementById('graduationDate').value;
         const degree = document.getElementById('degree').value;
@@ -97,10 +97,10 @@ function createEducationForm(){
         newEducation.classList.add('education-card');
         newEducation.innerHTML = `
             <div class="info-group">
-                <img id="schoolLogoOutput" src="${schoolLogo}" alt="School Logo" />
+                <img id="schoolLogo" src="${schoolLogo}" alt="School Logo" required/>
             </div>
             <div class="info-group">
-                <p id="schoolNameOutput">${schoolName}</p>
+                <p required id="schoolNameOutput">${schoolName} </p>
             </div>
             <div class="info-group">
                 <label for="graduationDateOutput">Graduation Date:</label>
@@ -166,11 +166,34 @@ function createWorkExperienceForm(){
 
     document.querySelector('.nested-button1').addEventListener('click', function() {
         console.log("Job Deletion");
-
+        
+        const workExperienceInfo = document.getElementById('workExperienceInfo');
+        if (workExperienceInfo.lastElementChild) {
+            workExperienceInfo.removeChild(workExperienceInfo.lastElementChild);
+        }
     });
-    document.querySelector('.nested-button2').addEventListener('click', function() {
+
+    document.querySelector('.nested-button2').addEventListener('click', function(event) {
+        event.preventDefault();
         console.log("Job Entry");
 
+        const companyName = document.getElementById('companyName').value;
+        const jobTitle = document.getElementById('jobTitle').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        const responsibilities = document.getElementById('responsibilities').value;
+
+        const workExperienceInfo = document.getElementById('workExperienceInfo');
+        const newWorkExperience = document.createElement('div');
+        newWorkExperience.classList.add('info-group');
+        newWorkExperience.innerHTML = `
+            <p>${companyName}</p>
+            <p>${jobTitle}</p>
+            <p>${startDate}</p>
+            <p>${endDate}</p>
+            <p>${responsibilities}</p>
+        `;
+        workExperienceInfo.appendChild(newWorkExperience);
     });
 }
 
@@ -208,14 +231,14 @@ function createSkillsForm(){
         const skillName = document.getElementById('skillName').value;
         const skillProficiency = document.getElementById('skillDropDown').value;
 
-        const skillsInfo = document.getElementById('skillsInfo');
+        const skillsContainer = document.getElementById('skillsContainer');
         const newSkill = document.createElement('div');
         newSkill.classList.add('info-group');
         newSkill.innerHTML = `
             <p>${skillName}</p>
             <p>${skillProficiency}</p>
         `;
-        skillsInfo.appendChild(newSkill);
+        skillsContainer.appendChild(newSkill);
 
     });
 
