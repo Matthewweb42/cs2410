@@ -139,7 +139,7 @@ function createWorkExperienceForm(){
             <label for="startDate">Start Date:</label>
             <input type="date" id="startDate" name="startDate" required>
             <label for="endDate">End Date:</label>
-            <input type="date" id="endDate" name="endDate">
+            <input type="date" id="endDate" name="endDate" value="Present" placeholder="Present">
             <label for="responsibilities">Responsibilities:</label>
             <textarea id="responsibilities" name="responsibilities" required></textarea>
             <button type="jobEntry" class="nested-button" >New Entry</button>
@@ -160,14 +160,14 @@ function createWorkExperienceForm(){
         const newWorkExperience = document.createElement('div');
         newWorkExperience.classList.add('work-experience-card');
         newWorkExperience.innerHTML = `
-            <div class="info-group">
-                <h1 id="companyOutput">${companyName}</h1>
+            <div class="info-group2">
+                <h2 id="companyOutput">${companyName}</h2>
                 <p id="startOutput">${startDate}</p> - <p id="endOutput">${endDate}</p>
             </div>
-            <div class="info-group">
-                <h2 id="positionOutput">${jobTitle}</h2>
+            <div class="info-group2">
+                <h1 id="positionOutput">${jobTitle}</h1>
             </div>
-            <div class="info-group">
+            <div class="info-group2">
                 <p id="tasksOutput">${responsibilities}</p>
             </div>
         `;
@@ -177,14 +177,14 @@ function createWorkExperienceForm(){
         workExperienceContainer.appendChild(newWorkExperience);
     });
 
-    const existingWorkCards = document.querySelectorAll('.work-experience-card');
-    existingWorkCards.forEach(card => {
-        card.addEventListener('click', function() {
-            card.parentElement.removeChild(card);
-        });
-    });
-
+    
 }
+const existingWorkCards = document.querySelectorAll('.work-experience-card');
+existingWorkCards.forEach(card => {
+    card.addEventListener('click', function() {
+        card.parentElement.removeChild(card);
+    });
+});
 
 function createSkillsForm(){
     const section = document.getElementById(`skillsSection`);
