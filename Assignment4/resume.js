@@ -153,7 +153,7 @@ function createWorkExperienceForm(){
         const companyName = document.getElementById('companyName').value;
         const jobTitle = document.getElementById('jobTitle').value;
         const startDate = document.getElementById('startDate').value;
-        const endDate = document.getElementById('endDate').value;
+        const endDate = document.getElementById('endDate').value || "Present";
         const responsibilities = document.getElementById('responsibilities').value;
 
         const workExperienceContainer = document.getElementById('workExperienceContainer');
