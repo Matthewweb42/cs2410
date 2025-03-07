@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     background-color: rgb(10, 10, 10);
     margin: 0;
     padding: 0;
@@ -119,10 +119,18 @@ main {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+
 #educationInfo {
     align-items: center;
 }
 
+#workExperienceContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
 
 #educationContainer{
     display: flex;
@@ -132,7 +140,7 @@ main {
     gap: 20px;
 }
 
-.education-card{
+.education-card, .work-experience-card{
     display: flex;
     background-color: rgb(184, 163, 43);
     padding: 5px;
@@ -144,6 +152,15 @@ main {
     width: 250px;
     height: 375px;
     overflow: hidden;
+}
+
+.work-experience-card{
+    display:flex;
+    flex-direction:column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    height:100%;
 }
 
 #contactInfo img {

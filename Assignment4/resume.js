@@ -127,11 +127,11 @@ existingCards.forEach(card => {
         card.parentElement.removeChild(card);
     });
 });
+
 function createWorkExperienceForm(){
     const section = document.getElementById('workExperienceSection');
     section.innerHTML = `
         <form>
-            <button type="deleteEntry" class="nested-button1" >Delete Last</button>
             <label for="companyName">Company Name:</label>
             <input type="text" id="companyName" name="companyName" required>
             <label for="jobTitle">Job Title:</label>
@@ -139,62 +139,51 @@ function createWorkExperienceForm(){
             <label for="startDate">Start Date:</label>
             <input type="date" id="startDate" name="startDate" required>
             <label for="endDate">End Date:</label>
-            <input type="date" id="endDate" name="endDate" placeholder="Present">
-            <label for="respnsibilities">Responsibilities:</label>
+            <input type="date" id="endDate" name="endDate">
+            <label for="responsibilities">Responsibilities:</label>
             <textarea id="responsibilities" name="responsibilities" required></textarea>
-            <button type="jobEntry" class="nested-button2" >New Entry</button>
+            <button type="jobEntry" class="nested-button" >New Entry</button>
 
         </form>
         
     `;
 
-    document.getElementById("companyName").addEventListener("input", function() {
-        document.getElementById("companyOutput").textContent = this.value;
-    });
-    document.getElementById("jobTitle").addEventListener("input", function() {
-        document.getElementById("positionOutput").textContent = this.value;
-    });
-    document.getElementById("startDate").addEventListener("input", function() {
-        document.getElementById("startOutput").textContent = this.value;
-    });
-    document.getElementById("endDate").addEventListener("input", function() {
-        document.getElementById("endOutput").textContent = this.value;
-    });
-    document.getElementById("responsibilities").addEventListener("input", function() {
-        document.getElementById("tasksOutput").textContent = this.value;
-    });
-
-    document.querySelector('.nested-button1').addEventListener('click', function() {
-        console.log("Job Deletion");
-        
-        const workExperienceInfo = document.getElementById('workExperienceInfo');
-        if (workExperienceInfo.lastElementChild) {
-            workExperienceInfo.removeChild(workExperienceInfo.lastElementChild);
-        }
-    });
-
-    document.querySelector('.nested-button2').addEventListener('click', function(event) {
+    document.querySelector('.nested-button').addEventListener('click', function(event) {
         event.preventDefault();
-        console.log("Job Entry");
-
         const companyName = document.getElementById('companyName').value;
         const jobTitle = document.getElementById('jobTitle').value;
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
         const responsibilities = document.getElementById('responsibilities').value;
 
-        const workExperienceInfo = document.getElementById('workExperienceInfo');
+        const workExperienceContainer = document.getElementById('workExperienceContainer');
         const newWorkExperience = document.createElement('div');
-        newWorkExperience.classList.add('info-group');
+        newWorkExperience.classList.add('work-experience-card');
         newWorkExperience.innerHTML = `
-            <p>${companyName}</p>
-            <p>${jobTitle}</p>
-            <p>${startDate}</p>
-            <p>${endDate}</p>
-            <p>${responsibilities}</p>
+            <div class="info-group">
+                <h1 id="companyOutput">${companyName}</h1>
+                <p id="startOutput">${startDate}</p> - <p id="endOutput">${endDate}</p>
+            </div>
+            <div class="info-group">
+                <h2 id="positionOutput">${jobTitle}</h2>
+            </div>
+            <div class="info-group">
+                <p id="tasksOutput">${responsibilities}</p>
+            </div>
         `;
-        workExperienceInfo.appendChild(newWorkExperience);
+        newWorkExperience.addEventListener('click', function() {
+            workExperienceContainer.removeChild(newWorkExperience);
+        });
+        workExperienceContainer.appendChild(newWorkExperience);
     });
+
+    const existingWorkCards = document.querySelectorAll('.work-experience-card');
+    existingWorkCards.forEach(card => {
+        card.addEventListener('click', function() {
+            card.parentElement.removeChild(card);
+        });
+    });
+
 }
 
 function createSkillsForm(){
