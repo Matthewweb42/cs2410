@@ -109,7 +109,6 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
     width: 98%;
     padding: 10px;
     margin-bottom: 20px;
@@ -119,6 +118,51 @@ main {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+#contactInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#skillsInfo{
+    display:flex;
+    justify-content: right;
+    align-self: center;
+}
+#skillsHeading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#skillsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.skill-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(184, 163, 43);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    margin-bottom: 20px;
+}
 
 #educationInfo {
     align-items: center;
@@ -170,6 +214,8 @@ main {
     max-width: 100px;
     border-radius: 50%;
     margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 #schoolLogo{
@@ -182,6 +228,7 @@ main {
 .info-group {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 10px;
 }

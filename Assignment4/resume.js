@@ -41,13 +41,13 @@ function createContactInfoForm(){
     section.innerHTML = `
         <form>
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="Matthew Webecke" required>
+            <input type="text" id="name" name="name" value="Arthur Pendragon" required>
             <label for="address">Address:</label>
-            <input type="text" id="address" name="address" value="447 Tough Luck Lane" required>
+            <input type="text" id="address" name="address" value="Camelot, Albion" required>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="Notanemail@haha.com" required>
+            <input type="email" id="email" name="email" value="arthur.pendragon@camelot.gov | excalibur.wielder@roundtable.org" required>
             <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" value="801-867-5309" required>
+            <input type="tel" id="phone" name="phone" value="Unavailable (Seek Merlin for Contact)" required>
         </form>
     `;
 
