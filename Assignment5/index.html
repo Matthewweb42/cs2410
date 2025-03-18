@@ -6,17 +6,17 @@
     <title>Image Selection</title>
     <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body data-theme="royal"> 
     <header>
         <h1>Image Selection</h1>
         <nav>
             <button id="toGallery">Gallery</button>
             <button id="toHome">Home</button>
-            <label>
-                <input type="checkbox" id="hero-mode">Hero Mode
-                <input type="checkbox" id="royal-mode">Royal Mode
-                <input type="checkbox" id="shadow-mode">Shadow Mode
-            </label>
+            <div>
+                <input class="theme-radio" name="theme" type="radio" value="hero" />Hero Mode
+                <input class="theme-radio" name="theme" type="radio" value="royal" checkled />Royal Mode
+                <input class="theme-radio" name="theme" type="radio" value="shadow" />Shadow Mode
+            </div>
         </nav>
     </header>
     <div id="image-selection">

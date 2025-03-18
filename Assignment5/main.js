@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedTheme === 'royal-mode') royalModeCheckbox.checked = true;
         if (savedTheme === 'shadow-mode') shadowModeCheckbox.checked = true;
     }
+
+    
     
     
     heroModeCheckbox.addEventListener("change", (e) => {
