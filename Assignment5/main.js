@@ -21,36 +21,43 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedTheme === 'shadow-mode') shadowModeCheckbox.checked = true;
     }
 
+    const radioButtons = document.getElementsByClassName("theme-radio");
+    for (const i of radioButtons) {
+        i.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                document.body.dataset.theme = e.target.value;
+                localStorage.setItem('theme', e.target.value);
+            }
+        })
+    };
     
-    
-    
-    heroModeCheckbox.addEventListener("change", (e) => {
-        if (e.target.checked) {
-            document.body.classList.add("hero-mode");
-            localStorage.setItem('theme', 'hero-mode');
-        } else {
-            document.body.classList.remove("hero-mode");
-            localStorage.setItem('theme');
-        }
-    });
-    royalModeCheckbox.addEventListener("change", (e) => {
-        if (e.target.checked) {
-            document.body.classList.add("royal-mode");
-            localStorage.setItem('theme', 'royal-mode');
-        } else {
-            document.body.classList.remove("royal-mode");
-            localStorage.setItem('theme');
-        }
-    });
-    shadowModeCheckbox.addEventListener("change", (e) => {
-        if (e.target.checked) {
-            document.body.classList.add("shadow-mode");
-            localStorage.setItem('theme', 'shadow-mode');
-        } else {
-            document.body.classList.remove("shadow-mode");
-            localStorage.setItem('theme');
-        }
-    });
+    // heroModeCheckbox.addEventListener("change", (e) => {
+    //     if (e.target.checked) {
+    //         document.body.classList.add("hero-mode");
+    //         localStorage.setItem('theme', 'hero-mode');
+    //     } else {
+    //         document.body.classList.remove("hero-mode");
+    //         localStorage.setItem('theme');
+    //     }
+    // });
+    // royalModeCheckbox.addEventListener("change", (e) => {
+    //     if (e.target.checked) {
+    //         document.body.classList.add("royal-mode");
+    //         localStorage.setItem('theme', 'royal-mode');
+    //     } else {
+    //         document.body.classList.remove("royal-mode");
+    //         localStorage.setItem('theme');
+    //     }
+    // });
+    // shadowModeCheckbox.addEventListener("change", (e) => {
+    //     if (e.target.checked) {
+    //         document.body.classList.add("shadow-mode");
+    //         localStorage.setItem('theme', 'shadow-mode');
+    //     } else {
+    //         document.body.classList.remove("shadow-mode");
+    //         localStorage.setItem('theme');
+    //     }
+    // });
     
 });
 
