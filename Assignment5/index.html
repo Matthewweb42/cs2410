@@ -7,9 +7,23 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>Image Selection</h1>
+    <header>
+        <h1>Image Selection</h1>
+        <nav>
+            <button id="toGallery">Gallery</button>
+            <button id="toHome">Home</button>
+            <label>
+                <input type="checkbox" id="hero-mode">Hero Mode
+                <input type="checkbox" id="royal-mode">Royal Mode
+                <input type="checkbox" id="shadow-mode">Shadow Mode
+            </label>
+        </nav>
+    </header>
     <div id="image-selection">
-        <!-- Image selection content will go here -->
+        <button onclick="fetchRandomColor()">Generate Random Color</button>
+<div id="colorBox" style="width: 200px; height: 200px; border: 2px solid black;"></div>
+
+         
     </div>
     <script src="main.js"></script>
 </body>
