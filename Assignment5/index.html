@@ -21,11 +21,16 @@
     </header>
     <div id="image-selection">
         <button onclick="fetchRandomBacon()">Generate Random Bacon</button>
-        <div id="colorBox" style="width: 200px; height: 200px; border: 2px solid black;"></div>     
         <button onclick="fetchRandomAnime()">Generate Random Anime Character</button>
-        <div id="colorBox" style="width: 200px; height: 200px; border: 2px solid black;"></div>     
         <button onclick="fetchRandomImage()">Generate Random Image</button>
-        <div id="colorBox" style="width: 200px; height: 200px; border: 2px solid black;"></div>     
+    </div>
+    <div id="show-image">
+        <div id="colorBox" style="width: 200px; height: 200px; border: 2px solid black;"></div>   
+        <div id="buttons">
+            <button id="new-image">New Image</button>
+            <button id="favorite">favorite</button>
+            <button id="unfavorite">unfavorite</button>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>

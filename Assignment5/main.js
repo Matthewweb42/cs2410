@@ -30,13 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         })
       }
-
-    
-    
 });
 
 
-function fetchRandomImage() {
+function fetchRandomBacon() {
     const width = 200;
     const height = 200;
     const imageUrl = `https://baconmockup.com/${width}/${height}`;
