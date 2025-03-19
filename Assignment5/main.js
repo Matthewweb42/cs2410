@@ -9,71 +9,45 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html';
     });
 
-    const heroModeCheckbox = document.getElementById("hero-mode");
-    const royalModeCheckbox = document.getElementById("royal-mode");
-    const shadowModeCheckbox = document.getElementById("shadow-mode");
+    const themeRadios = document.getElementsByClassName('theme-radio');
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
-        document.body.classList.add(savedTheme);
-        if (savedTheme === 'hero-mode') heroModeCheckbox.checked = true;
-        if (savedTheme === 'royal-mode') royalModeCheckbox.checked = true;
-        if (savedTheme === 'shadow-mode') shadowModeCheckbox.checked = true;
+        document.body.setAttribute('data-theme', savedTheme);
+        for (let radio of themeRadios) {
+            if (radio.value === savedTheme) {
+                radio.checked = true;
+            }
+        }
     }
 
     const radioButtons = document.getElementsByClassName("theme-radio");
     for (const i of radioButtons) {
-        i.addEventListener("change", (e) => {
-            if (e.target.checked) {
-                document.body.dataset.theme = e.target.value;
-                localStorage.setItem('theme', e.target.value);
-            }
+        i.addEventListener("change", e => {
+          if (e.target.checked) {
+            document.body.dataset.theme = e.target.value;
+            localStorage.setItem('theme', e.target.value);
+          }
         })
-    };
+      }
+
     
-    // heroModeCheckbox.addEventListener("change", (e) => {
-    //     if (e.target.checked) {
-    //         document.body.classList.add("hero-mode");
-    //         localStorage.setItem('theme', 'hero-mode');
-    //     } else {
-    //         document.body.classList.remove("hero-mode");
-    //         localStorage.setItem('theme');
-    //     }
-    // });
-    // royalModeCheckbox.addEventListener("change", (e) => {
-    //     if (e.target.checked) {
-    //         document.body.classList.add("royal-mode");
-    //         localStorage.setItem('theme', 'royal-mode');
-    //     } else {
-    //         document.body.classList.remove("royal-mode");
-    //         localStorage.setItem('theme');
-    //     }
-    // });
-    // shadowModeCheckbox.addEventListener("change", (e) => {
-    //     if (e.target.checked) {
-    //         document.body.classList.add("shadow-mode");
-    //         localStorage.setItem('theme', 'shadow-mode');
-    //     } else {
-    //         document.body.classList.remove("shadow-mode");
-    //         localStorage.setItem('theme');
-    //     }
-    // });
     
 });
 
 
-async function fetchRandomColor() {
-    try {
-        const response = await fetch('https://www.colourlovers.com/api/colors/random?format=json');
-        const data = await response.json();
+function fetchRandomImage() {
+    const width = 200;
+    const height = 200;
+    const imageUrl = `https://baconmockup.com/${width}/${height}`;
+    
+    const imgElement = document.createElement('img');
+    imgElement.src = imageUrl;
+    imgElement.alt = 'Random Bacon Image';
+    imgElement.style.width = `${width}px`;
+    imgElement.style.height = `${height}px`;
 
-        if (data.length > 0) {
-            const colorHex = `#${data[0].hex}`; // Extract the hex color
-
-            // Apply the color to the div
-            document.getElementById('colorBox').style.backgroundColor = colorHex;
-        }
-    } catch (error) {
-        console.error("Error fetching color:", error);
-    }
+    const colorBox = document.getElementById('colorBox');
+    colorBox.innerHTML = ''; // Clear any existing content
+    colorBox.appendChild(imgElement);
 }
