@@ -32,19 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 });
 
+async function fetchRandomBacon(){
+    const result = await fetch("https://baconmockup.com/300/200");
+    const data = await result.json();
 
-function fetchRandomBacon() {
-    const width = 200;
-    const height = 200;
-    const imageUrl = `https://baconmockup.com/${width}/${height}`;
-    
-    const imgElement = document.createElement('img');
-    imgElement.src = imageUrl;
-    imgElement.alt = 'Random Bacon Image';
-    imgElement.style.width = `${width}px`;
-    imgElement.style.height = `${height}px`;
-
-    const colorBox = document.getElementById('colorBox');
-    colorBox.innerHTML = ''; // Clear any existing content
-    colorBox.appendChild(imgElement);
+    document.getElementById("imageBox").innerHTML = `<img src="${data.message}" alt="Random Bacon Image" />`;
 }
+
+// function fetchRandomBacon() {
+//     const width = 300;
+//     const height = 300;
+//     const imageUrl = `https://baconmockup.com/${width}/${height}`;
+    
+//     const imgElement = document.createElement('img');
+//     imgElement.src = imageUrl;
+//     imgElement.alt = 'Random Bacon Image';
+//     imgElement.style.width = `${width}px`;
+//     imgElement.style.height = `${height}px`;
+
+//     const colorBox = document.getElementById('colorBox');
+//     colorBox.innerHTML = ''; // Clear any existing content
+//     colorBox.appendChild(imgElement);
+// }
