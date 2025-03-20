@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newImageButton = document.getElementById('new-image');
     const favoriteButton = document.getElementById('favorite');
     const unfavoriteButton = document.getElementById('unfavorite');
-    const baconButton = document.getElementById('bacon-button');
+    const duckButton = document.getElementById('duck-button');
     const catButton = document.getElementById('cat-button');
     const dogButton = document.getElementById('dog-button');
 
@@ -39,22 +39,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       
     dogButton.addEventListener("click", () => {
-        fetchRandomDog();
         dogButton.classList.toggle("active");
         catButton.classList.remove("active");
-        baconButton.classList.remove("active");
+        duckButton.classList.remove("active");
     });
     catButton.addEventListener("click", () => {
-        fetchRandomCat();
         dogButton.classList.remove("active");
         catButton.classList.toggle("active");
-        baconButton.classList.remove("active");
+        duckButton.classList.remove("active");
     });
-    baconButton.addEventListener("click", () => {
-        fetchRandomBacon();
+    duckButton.addEventListener("click", () => {
         dogButton.classList.remove("active");
         catButton.classList.remove("active");
-        baconButton.classList.toggle("active");
+        duckButton.classList.toggle("active");
     });
 
     newImageButton.addEventListener('click', () => {
@@ -64,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (catButton.classList.contains('active')) {
             fetchRandomCat();
         }  
-        if (baconButton.classList.contains('active')) {
-            fetchRandomBacon();
+        if (duckButton.classList.contains('active')) {
+            fetchRandomDuck();
         }
     }  );
 
@@ -102,19 +99,50 @@ const imageHolder = document.getElementById("imageBox");
 const nextBtn = document.getElementById("new-image");
 
 async function fetchRandomDog() {
-    const result1 = await fetch("https://dog.ceo/api/breeds/image/random");
+    const apiUrl = "https://dog.ceo/api/breeds/image/random";
+    const result1 = await fetch(apiUrl);
     const result2 = await result1.json();
-    console.log(result2);
+    const imageHolder = document.getElementById("imageBox");
     imageHolder.setAttribute("src", result2.message);
+
+    // Update API address and image URL
+    document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
+    document.getElementById('image-url').textContent = `Image URL: ${result2.message}`;
 }
 
-async function fetchRandomCat(){
-    const imageUrl = "https://cataas.com/cat";
+function fetchRandomCat() {
+    const apiUrl = "https://cataas.com/cat";
+    const imageUrl = `${apiUrl}?${new Date().getTime()}`;
     const imageHolder = document.getElementById("imageBox");
     imageHolder.setAttribute("src", imageUrl);
+
+    // Update API address and image URL
+    document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
+    document.getElementById('image-url').textContent = `Image URL: ${imageUrl}`;
 }
 
+// async function fetchRandomDuck() {
+//     const apiUrl = "https:\/\/randomfox.ca\/images\/117.jpg";
+//     const result1 = await fetch(apiUrl);
+//     const result2 = await result1.json();
+//     const imageHolder = document.getElementById("imageBox");
+//     imageHolder.setAttribute("src", result2.url);
 
+//     // Update API address and image URL
+//     document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
+//     document.getElementById('image-url').textContent = `Image URL: ${result2.url}`;
+// }
+
+function fetchRandomDuck() {
+    const apiUrl = "https:\/\/randomfox.ca\/images\/117.jpg";
+    const imageUrl = `${apiUrl}?${new Date().getTime()}`;
+    const imageHolder = document.getElementById("imageBox");
+    imageHolder.setAttribute("src", imageUrl);
+
+    // Update API address and image URL
+    document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
+    document.getElementById('image-url').textContent = `Image URL: ${imageUrl}`;
+}
 
 
 
