@@ -76,7 +76,7 @@ body[data-theme="hero"] nav {
     box-shadow: 0px 4px 8px rgba(255, 204, 0, 0.5);
     border-bottom: 4px solid #ff0000;
 }
-body[data-theme="hero"] nav button:hover, body[data-theme="hero"] button:hover{
+body[data-theme="hero"] nav button:hover, body[data-theme="hero"] button:hover,body[data-theme="hero"] button.active{
     background-color: #c79d27;
 }
 body[data-theme="hero"] h1, body[data-theme="hero"] h2, body[data-theme="hero"] h3 {
@@ -107,7 +107,7 @@ body[data-theme="royal"] nav {
     background-color: #1a252f;
     border-bottom: 4px solid #46505b;
 }
-body[data-theme="royal"] nav button:hover,body[data-theme="royal"] button:hover{
+body[data-theme="royal"] nav button:hover,body[data-theme="royal"] button:hover,body[data-theme="royal"] button.active{
     background-color: #5d6d7e;
 }
 body[data-theme="royal"] h1, body[data-theme="royal"] h2, body[data-theme="royal"] h3 {
@@ -134,7 +134,7 @@ body[data-theme="shadow"] nav {
     background-color: #121212;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
 }
-body[data-theme="shadow"] nav button:hover,body[data-theme="shadow"] button:hover{
+body[data-theme="shadow"] nav button:hover,body[data-theme="shadow"] button:hover,body[data-theme="shadow"] button.active{
     background-color: #5b5b5b;
 }
 body[data-theme="shadow"] h1, body[data-theme="shadow"] h2, body[data-theme="shadow"] h3 {

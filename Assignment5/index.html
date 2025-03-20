@@ -20,16 +20,17 @@
         </nav>
     </header>
     <div id="image-selection">
-        <button onclick="fetchRandomBacon()">Generate Random Bacon</button>
-        <button onclick="fetchRandomAnime()">Generate Random Anime Character</button>
-        <button onclick="fetchRandomImage()">Generate Random Image</button>
+        <button id="bacon-button" onclick="fetchRandomBacon()">Generate Random Bacon</button>
+        <button id="cat-button" onclick="fetchRandomCat()">Generate Random Cat</button>
+        <button id="dog-button" onclick="fetchRandomDog()">Generate Random Dog</button>
     </div>
     <div id="show-image">
-        <div id="iamgeBox" style="width: 300px; height: 300px; border: 2px solid black;"></div>   
+        <!-- <div id="imageBox" style="width: 300px; height: 300px; border: 2px solid black;"></div>  -->
+        <img id="imageBox" src="" alt="image" style="width: 300px; height: 300px; border: 2px solid black;">  
         <div id="buttons">
             <button id="new-image">New Image</button>
-            <button id="favorite">favorite</button>
-            <button id="unfavorite">unfavorite</button>
+            <button id="favorite">Favorite</button>
+            <button id="unfavorite">Unfavorite</button>
         </div>
     </div>
     <script src="main.js"></script>
