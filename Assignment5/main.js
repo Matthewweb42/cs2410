@@ -106,12 +106,11 @@ async function fetchRandomCat() {
     const apiUrl = "https://cataas.com/cat?json=true";
     const result1 = await fetch(apiUrl);
     const result2 = await result1.json();
-    const imageUrl = `${result2.url}`;
     const imageHolder = document.getElementById("imageBox");
-    imageHolder.setAttribute("src", imageUrl);
+    imageHolder.setAttribute("src", result2.url);
 
     document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
-    document.getElementById('image-url').textContent = `Image URL: ${imageUrl}`;
+    document.getElementById('image-url').textContent = `Image URL: ${result2.url}`;
 }
 
 
