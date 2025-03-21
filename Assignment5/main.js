@@ -118,8 +118,6 @@ async function fetchRandomFox() {
     const apiUrl = "https://randomfox.ca/floof/";
     const result1 = await fetch(apiUrl);
     const result2 = await result1.json();
-    console.log("Result one: " + result1);
-    console.log("Result two: " + result2);
     const imageHolder = document.getElementById("imageBox");
     imageHolder.setAttribute("src", result2.image);
 

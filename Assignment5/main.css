@@ -57,6 +57,12 @@ nav {
     padding: 10px;
 }
 
+#imageBox{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
 
 /* Hero Mode - Bright & Bold */
 body[data-theme="hero"] {
@@ -86,6 +92,7 @@ body[data-theme="hero"] h1, body[data-theme="hero"] h2, body[data-theme="hero"] 
 body[data-theme="hero"] img {
     filter: brightness(110%) contrast(120%);
     box-shadow: 0px 5px 15px rgba(255, 165, 0, 0.7);
+    
 }
 body[data-theme="hero"] button {
     color: #ffffff;
@@ -132,7 +139,7 @@ body[data-theme="shadow"] {
 }
 body[data-theme="shadow"] nav {
     background-color: #121212;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 4px 8px rgba(60, 60, 60, 0.8);
 }
 body[data-theme="shadow"] nav button:hover,body[data-theme="shadow"] button:hover,body[data-theme="shadow"] button.active{
     background-color: #5b5b5b;
@@ -144,8 +151,12 @@ body[data-theme="shadow"] h1, body[data-theme="shadow"] h2, body[data-theme="sha
 body[data-theme="shadow"] img {
     filter: grayscale(80%) brightness(70%);
     opacity: 0.9;
+    box-shadow: 0px 4px 8px rgba(60, 60, 60, 0.8);
+
 }
 body[data-theme="shadow"] button {
     color: #ffffff;
     background-color: #3a3a3a;
+    box-shadow: 0px 4px 8px rgba(60, 60, 60, 0.8);
+
 }

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toGalleryButton = document.getElementById('toGallery');
     const toHomeButton = document.getElementById('toHome');
+    const imageBox = document.getElementById('imageBox');
 
     toGalleryButton.addEventListener('click', () => {
         window.location.href = 'gallery.html';
@@ -28,6 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', e.target.value);
           }
         })
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const imageUrl = urlParams.get('url');
+      if (imageUrl) {
+          imageBox.setAttribute('src', imageUrl);
       }
 
 });
