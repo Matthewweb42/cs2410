@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newImageButton = document.getElementById('new-image');
     const favoriteButton = document.getElementById('favorite');
     const unfavoriteButton = document.getElementById('unfavorite');
-    const duckButton = document.getElementById('duck-button');
+    const foxButton = document.getElementById('fox-button');
     const catButton = document.getElementById('cat-button');
     const dogButton = document.getElementById('dog-button');
 
@@ -41,17 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
     dogButton.addEventListener("click", () => {
         dogButton.classList.toggle("active");
         catButton.classList.remove("active");
-        duckButton.classList.remove("active");
+        foxButton.classList.remove("active");
     });
     catButton.addEventListener("click", () => {
         dogButton.classList.remove("active");
         catButton.classList.toggle("active");
-        duckButton.classList.remove("active");
+        foxButton.classList.remove("active");
     });
-    duckButton.addEventListener("click", () => {
+    foxButton.addEventListener("click", () => {
         dogButton.classList.remove("active");
         catButton.classList.remove("active");
-        duckButton.classList.toggle("active");
+        foxButton.classList.toggle("active");
     });
 
     newImageButton.addEventListener('click', () => {
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (catButton.classList.contains('active')) {
             fetchRandomCat();
         }  
-        if (duckButton.classList.contains('active')) {
-            fetchRandomDuck();
+        if (foxButton.classList.contains('active')) {
+            fetchRandomFox();
         }
     }  );
 
@@ -88,13 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// async function fetchRandomDog(){
-//     const result = await fetch("https://dog.ceo/api/breeds/image/random");
-//     const data = await result.json();
-
-//     document.getElementById("imageBox").innerHTML = `<img src="${data.message}" alt="Random Bacon Image" />`;
-// }
-
 const imageHolder = document.getElementById("imageBox");
 const nextBtn = document.getElementById("new-image");
 
@@ -105,44 +98,36 @@ async function fetchRandomDog() {
     const imageHolder = document.getElementById("imageBox");
     imageHolder.setAttribute("src", result2.message);
 
-    // Update API address and image URL
     document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
     document.getElementById('image-url').textContent = `Image URL: ${result2.message}`;
 }
 
-function fetchRandomCat() {
-    const apiUrl = "https://cataas.com/cat";
-    const imageUrl = `${apiUrl}?${new Date().getTime()}`;
+async function fetchRandomCat() {
+    const apiUrl = "https://cataas.com/cat?json=true";
+    const result1 = await fetch(apiUrl);
+    const result2 = await result1.json();
+    const imageUrl = `${result2.url}`;
     const imageHolder = document.getElementById("imageBox");
     imageHolder.setAttribute("src", imageUrl);
 
-    // Update API address and image URL
     document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
     document.getElementById('image-url').textContent = `Image URL: ${imageUrl}`;
 }
 
-// async function fetchRandomDuck() {
-//     const apiUrl = "https:\/\/randomfox.ca\/images\/117.jpg";
-//     const result1 = await fetch(apiUrl);
-//     const result2 = await result1.json();
-//     const imageHolder = document.getElementById("imageBox");
-//     imageHolder.setAttribute("src", result2.url);
 
-//     // Update API address and image URL
-//     document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
-//     document.getElementById('image-url').textContent = `Image URL: ${result2.url}`;
-// }
-
-function fetchRandomDuck() {
-    const apiUrl = "https:\/\/randomfox.ca\/images\/117.jpg";
-    const imageUrl = `${apiUrl}?${new Date().getTime()}`;
+async function fetchRandomFox() {
+    const apiUrl = "https://randomfox.ca/floof/";
+    const result1 = await fetch(apiUrl);
+    const result2 = await result1.json();
+    console.log("Result one: " + result1);
+    console.log("Result two: " + result2);
     const imageHolder = document.getElementById("imageBox");
-    imageHolder.setAttribute("src", imageUrl);
+    imageHolder.setAttribute("src", result2.image);
 
-    // Update API address and image URL
     document.getElementById('image-api').textContent = `API Address: ${apiUrl}`;
-    document.getElementById('image-url').textContent = `Image URL: ${imageUrl}`;
+    document.getElementById('image-url').textContent = `Image URL: ${result2.image}`;
 }
+
 
 
 
