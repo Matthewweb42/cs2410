@@ -4,9 +4,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const newImageButton = document.getElementById('new-image');
     const favoriteButton = document.getElementById('favorite');
     const unfavoriteButton = document.getElementById('unfavorite');
+    const imageBox = document.getElementById('imageBox');
+    let favorites = [];
     const foxButton = document.getElementById('fox-button');
     const catButton = document.getElementById('cat-button');
     const dogButton = document.getElementById('dog-button');
+
+
+    const input = document.getElementById("input-text");
+    const submitBtn = document.getElementById("submit-btn");
+    const updateBtn = document.getElementById("update-btn");
+    const outputDiv = document.getElementById("output");
+
+    const url = "http://localhost:8000/";
+    const filename = "favs.txt";
+
+    submitBtn.addEventListener("click", () => {
+        const data = {
+            message: input.value,
+        }
+        
+        fetch(url + "api/update-favs", {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+    });
+
+    updateBtn.addEventListener("click", () => {
+        fetch(url + filename)
+        .then(res => res.json())
+        .then(res => {
+            outputDiv.innerText = res.message;
+        });
+    });
 
     toGalleryButton.addEventListener('click', () => {
         window.location.href = 'gallery.html';
@@ -66,28 +99,83 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }  );
 
-    favoriteButton.addEventListener('click', () => {
-        favoriteButton.classList.toggle('active');
-        if (favoriteButton.classList.contains('active')) {
-            // Perform actions when the button is active
-            console.log('Favorite button is active');
-        } else {
-            // Perform actions when the button is not active
-            console.log('Favorite button is not active');
-        }
-    });
-    unfavoriteButton.addEventListener('click', () => {
-        unfavoriteButton.classList.toggle('active');
-        if (unfavoriteButton.classList.contains('active')) {
-            // Perform actions when the button is active
-            console.log('Unfavorite button is active');
-        } else {
-            // Perform actions when the button is not active
-            console.log('Unfavorite button is not active');
-        }
-    });
-});
 
+    fetch('favs.txt')
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim()) {
+                favorites = JSON.parse(data);
+                checkIfFavorite();
+            }
+        });
+
+    function checkIfFavorite() {
+        const currentImageUrl = imageBox.getAttribute('src');
+        if (favorites.some(fav => fav.url === currentImageUrl)) {
+            favoriteButton.classList.add('active');
+        } else {
+            favoriteButton.classList.remove('active');
+        }
+    }
+
+    function saveFavorites() {
+        const data = JSON.stringify(favorites, null, 2);
+        // Save updated favorites to favs.txt (this requires server-side handling)
+        // For demonstration purposes, we'll log the data to the console
+        console.log(data);
+    }
+
+    favoriteButton.addEventListener('click', () => {
+        const currentImageUrl = imageBox.getAttribute('src');
+        if (!currentImageUrl) return;
+
+        if (favoriteButton.classList.contains('active')) {
+            // Unfavorite the image
+            favorites = favorites.filter(fav => fav.url !== currentImageUrl);
+            favoriteButton.classList.remove('active');
+        } else {
+            // Favorite the image
+            const newFavorite = {
+                url: currentImageUrl,
+                category: getCurrentCategory(),
+                date: new Date().toISOString()
+            };
+            favorites.push(newFavorite);
+            favoriteButton.classList.add('active');
+        }
+        saveFavorites();
+    });
+
+    function getCurrentCategory() {
+        if (dogButton.classList.contains('active')) return 'dog';
+        if (catButton.classList.contains('active')) return 'cat';
+        if (foxButton.classList.contains('active')) return 'fox';
+        return 'unknown';
+    }
+
+
+//     favoriteButton.addEventListener('click', () => {
+//         favoriteButton.classList.toggle('active');
+//         if (favoriteButton.classList.contains('active')) {
+//             // Perform actions when the button is active
+//             console.log('Favorite button is active');
+//         } else {
+//             // Perform actions when the button is not active
+//             console.log('Favorite button is not active');
+//         }
+//     });
+//     unfavoriteButton.addEventListener('click', () => {
+//         unfavoriteButton.classList.toggle('active');
+//         if (unfavoriteButton.classList.contains('active')) {
+//             // Perform actions when the button is active
+//             console.log('Unfavorite button is active');
+//         } else {
+//             // Perform actions when the button is not active
+//             console.log('Unfavorite button is not active');
+//         }
+//     });
+// });
+});
 const imageHolder = document.getElementById("imageBox");
 const nextBtn = document.getElementById("new-image");
 

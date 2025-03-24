@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterFoxesButton = document.getElementById('filter-foxes');
     const gallery = document.getElementById('gallery');
 
+
+
+
     toGalleryButton.addEventListener('click', () => {
         window.location.href = 'gallery.html';
     })
