@@ -41,62 +41,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       // Load favorites from favs.txt
-    fetch('favs.txt')
-    .then(response => response.text())
-    .then(data => {
-        const favorites = data.trim().split('\n').map(line => JSON.parse(line));
-        displayFavorites(favorites);
-    });
+//     fetch('https://localhost:8000/favs.txt')
+//         .then(response => response.text())
+//         .then(data => {
+//             const favorites = data.trim().split('\n').map(line => JSON.parse(line));
+//             displayFavorites(favorites);
+//         });
 
-function displayFavorites(favorites) {
-    gallery.innerHTML = '';
-    favorites.forEach(favorite => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.dataset.category = favorite.category;
+//     function displayFavorites(favorites) {
+//         gallery.innerHTML = '';
+//         favorites.forEach(favorite => {
+//             const card = document.createElement('div');
+//             card.classList.add('card');
+//             card.dataset.category = favorite.category;
 
-        const img = document.createElement('img');
-        img.src = favorite.url;
-        img.alt = favorite.category;
-        img.addEventListener('click', () => {
-            window.location.href = `image.html?url=${encodeURIComponent(favorite.url)}`;
-        });
+//             const img = document.createElement('img');
+//             img.src = favorite.url;
+//             img.alt = favorite.category;
+//             img.addEventListener('click', () => {
+//                 window.location.href = `image.html?url=${encodeURIComponent(favorite.url)}`;
+//             });
 
-        const info = document.createElement('div');
-        info.classList.add('info');
-        info.textContent = `Category: ${favorite.category} | Date: ${favorite.date}`;
+//             const info = document.createElement('div');
+//             info.classList.add('info');
+//             info.textContent = `Category: ${favorite.category} | Date: ${favorite.date}`;
 
-        const removeButton = document.createElement('button');
-        removeButton.classList.add('remove');
-        removeButton.textContent = 'X';
-        removeButton.addEventListener('click', () => {
-            removeFavorite(favorite.url);
-            card.remove();
-        });
+//             const removeButton = document.createElement('button');
+//             removeButton.classList.add('remove');
+//             removeButton.textContent = 'X';
+//             removeButton.addEventListener('click', () => {
+//                 removeFavorite(favorite.url);
+//                 card.remove();
+//             });
 
-        card.appendChild(img);
-        card.appendChild(info);
-        card.appendChild(removeButton);
-        gallery.appendChild(card);
-    });
-}
+//             card.appendChild(img);
+//             card.appendChild(info);
+//             card.appendChild(removeButton);
+//             gallery.appendChild(card);
+//         });
+//     }
 
-function removeFavorite(url) {
-    fetch('favs.txt')
-        .then(response => response.text())
-        .then(data => {
-            const favorites = data.trim().split('\n').map(line => JSON.parse(line));
-            const updatedFavorites = favorites.filter(favorite => favorite.url !== url);
-            saveFavorites(updatedFavorites);
-        });
-}
+//     function removeFavorite(url) {
+//         fetch('https://localhost:8000/favs.txt')
+//             .then(response => response.text())
+//             .then(data => {
+//                 const favorites = data.trim().split('\n').map(line => JSON.parse(line));
+//                 const updatedFavorites = favorites.filter(favorite => favorite.url !== url);
+//                 saveFavorites(updatedFavorites);
+//             });
+//     }
 
-function saveFavorites(favorites) {
-    const data = favorites.map(favorite => JSON.stringify(favorite)).join('\n');
-    // Save updated favorites to favs.txt (this requires server-side handling)
-    // For demonstration purposes, we'll log the data to the console
-    console.log(data);
-}
+// function saveFavorites(favorites) {
+//     const data = favorites.map(favorite => JSON.stringify(favorite)).join('\n');
+//     // Save updated favorites to favs.txt (this requires server-side handling)
+//     // For demonstration purposes, we'll log the data to the console
+//     console.log(data);
+// }
 
 filterAllButton.addEventListener('click', () => {
     filterCards('all');
