@@ -29,6 +29,9 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
         path_without_query = self.path.split('?')[0]
         file_requested = path_without_query.lstrip('/')  # Remove leading slash
 
+        if file_requested == '':
+            file_requested = 'index.html'
+
         if os.path.isfile(file_requested):
             self.send_response(200)
 

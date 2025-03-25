@@ -49,34 +49,54 @@ document.addEventListener('DOMContentLoaded', () => {
         dogButton.classList.toggle("active");
         catButton.classList.remove("active");
         foxButton.classList.remove("active");
+    if (favoriteButton.classList.contains('active')) {
+        favoriteButton.classList.toggle('active');
+    }
+        
     });
     catButton.addEventListener("click", () => {
         dogButton.classList.remove("active");
         catButton.classList.toggle("active");
         foxButton.classList.remove("active");
+    if (favoriteButton.classList.contains('active')) {
+        favoriteButton.classList.toggle('active');
+    }
     });
     foxButton.addEventListener("click", () => {
         dogButton.classList.remove("active");
         catButton.classList.remove("active");
         foxButton.classList.toggle("active");
+    if (favoriteButton.classList.contains('active')) {
+        favoriteButton.classList.toggle('active');
+    }
     });
 
     newImageButton.addEventListener('click', () => {
         if (dogButton.classList.contains('active')) {
             fetchRandomDog();
         }
+        if (favoriteButton.classList.contains('active')) {
+            favoriteButton.classList.toggle('active');
+        }
         if (catButton.classList.contains('active')) {
             fetchRandomCat();
+        }
+        if (favoriteButton.classList.contains('active')) {
+            favoriteButton.classList.toggle('active');
         }  
         if (foxButton.classList.contains('active')) {
             fetchRandomFox();
+        if (favoriteButton.classList.contains('active')) {
+            favoriteButton.classList.toggle('active');
         }
+    }
     });
 
 
 favoriteButton.addEventListener('click', () => {
     favoriteButton.classList.toggle('active');
     const currentImageUrl = imageBox.getAttribute('src');
+    console.log(currentImageUrl);
     if (!currentImageUrl) return;
 
     if (favoriteButton.classList.contains('active')) {
@@ -86,10 +106,11 @@ favoriteButton.addEventListener('click', () => {
             date: new Date().toISOString()
         };
         favorites.push(newFavorite);
+        saveFavorites(newFavorite);
     } else {
         favorites = favorites.filter(fav => fav.url !== currentImageUrl);
+        saveFavorites();
     }
-    saveFavorites();
 });
 
 function getCurrentCategory() {
