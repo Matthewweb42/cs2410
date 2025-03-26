@@ -63,7 +63,8 @@ function displayFavorites(favorites) {
 
         const info = document.createElement('div');
         info.classList.add('info');
-        info.textContent = `Category: ${favorite.category} | Date: ${favorite.date}`;
+        const date = new Date(favorite.date).toLocaleDateString();
+        info.textContent = `Category: ${favorite.category} | Date: ${date}`;
 
         const removeButton = document.createElement('button');
         removeButton.classList.add('remove');

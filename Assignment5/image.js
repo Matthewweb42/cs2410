@@ -30,10 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         })
       }
+
       const urlParams = new URLSearchParams(window.location.search);
       const imageUrl = urlParams.get('url');
-      if (imageUrl) {
-          imageBox.setAttribute('src', imageUrl);
-      }
-
+  
+      fetch('http://localhost:8000/favs.txt')
+          .then(response => response.text())
+          .then(data => {
+              const favorites = data.trim().split('\n').map(line => JSON.parse(line));
+              const favorite = favorites.find(fav => fav.url === imageUrl);
+  
+              if (favorite) {
+                  imageBox.setAttribute('src', favorite.url);
+  
+                  const imageCategory = favorite.category;
+                  if (imageCategory) {
+                      document.getElementById('category').innerText = `Category: ${imageCategory}`;
+                  }
+  
+                  const imageDate = new Date(favorite.date).toLocaleDateString();
+                  if (imageDate) {
+                      document.getElementById('image-date').innerText = `Date Added: ${imageDate}`;
+                  }
+              }
+          });
 });

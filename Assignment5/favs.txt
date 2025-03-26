@@ -1,2 +1,3 @@
-{"url":"https://images.dog.ceo/breeds/terrier-toy/n02087046_1468.jpg","category":"dog","date":"2025-03-25T20:17:35.396Z"}
-{"url":"https://images.dog.ceo/breeds/bulldog-french/n02108915_720.jpg","category":"dog","date":"2025-03-25T20:17:42.229Z"}
+{"url":"https://cataas.com/cat/K5MBmIi4fTnKDCUf?position=center","category":"cat","date":"2025-03-26T15:52:00.200Z"}
+{"url":"https://randomfox.ca/images/84.jpg","category":"fox","date":"2025-03-26T15:52:05.949Z"}
+{"url":"https://randomfox.ca/images/122.jpg","category":"fox","date":"2025-03-26T15:52:11.778Z"}
