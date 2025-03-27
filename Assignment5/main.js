@@ -13,7 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 //
     const url = "http://localhost:8000/";
     const filename = "favs.txt";
-
+    fetch(url + "favs.txt")
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim()) {
+                favorites = data.trim().split('\n').map(line => JSON.parse(line));
+            }
+        })
+        
 
     toGalleryButton.addEventListener('click', () => {
         window.location.href = 'gallery.html';
