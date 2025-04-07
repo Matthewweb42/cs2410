@@ -1,4 +1,5 @@
-{"url":"https://cataas.com/cat/aBiCVkTdwrUngdWW?position=center","category":"cat","date":"2025-03-27T20:09:30.299Z"}
 {"url":"https://cataas.com/cat/moxNpuZMu0OWX2WJ?position=center","category":"cat","date":"2025-03-27T20:13:01.563Z"}
-{"url":"https://cataas.com/cat/GXyc94HTtHIYGwSN?position=center","category":"cat","date":"2025-03-27T20:14:29.991Z"}
-{"url":"https://images.dog.ceo/breeds/terrier-australian/n02096294_1231.jpg","category":"dog","date":"2025-03-27T20:15:35.263Z"}
+{"url":"https://cataas.com/cat/7ojFOD9O1yjNcIDZ?position=center","category":"cat","date":"2025-03-28T15:40:04.250Z"}
+{"url":"https://randomfox.ca/images/13.jpg","category":"fox","date":"2025-03-28T15:40:07.631Z"}
+{"url":"https://images.dog.ceo/breeds/bulldog-english/jager-2.jpg","category":"dog","date":"2025-03-28T15:40:11.686Z"}
+{"url":"https://images.dog.ceo/breeds/spaniel-sussex/n02102480_5808.jpg","category":"dog","date":"2025-03-28T15:40:14.124Z"}

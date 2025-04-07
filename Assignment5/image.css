@@ -51,6 +51,12 @@ header {
     border-radius: 5px;
     cursor: pointer;
 }
+#buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 10px; 
+}
 nav{
     display: flex;
     position: fixed;
