@@ -1,0 +1,143 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    z-index: 1000;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.nav-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #444;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu li {
+    padding: 10px 20px;
+}
+
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu li a i {
+    margin-right: 10px;
+}
+
+.nav-menu li a.active {
+    background-color: #555;
+}
+
+.nav-menu li a:hover {
+    background-color: #666;
+}
+
+.nav-menu.show {
+    display: flex;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px; /* Adjust for fixed header */
+    padding: 20px;
+    background-color: #f4f4f4;
+    justify-content: center;
+    align-items: center;
+}
+
+#movie-info-content, #tv-info-content, #person-info-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.movie-item, .tv-item, .person-item {
+    text-align: center;
+    width: 150px;
+}
+
+.movie-poster, .tv-poster, .person-profile {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.movie-poster:hover, .tv-poster:hover, .person-profile:hover {
+    transform: scale(1.1);
+}
+
+.movie-item h3, .tv-item h3, .person-item h3 {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #333;
+}
+
+#search-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+#search-mode {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+#search-text {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
