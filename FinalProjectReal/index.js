@@ -153,8 +153,18 @@ function displayMovies(movies) {
             const title = document.createElement("h3");
             title.textContent = movie.title;
 
+            const releaseYear = document.createElement("p");
+            releaseYear.textContent = `Release Year: ${new Date(movie.release_date).getFullYear()}`;
+            releaseYear.classList.add("release-year");
+
+            const voteAverage = document.createElement("p");
+            voteAverage.textContent = `Rating: ${movie.vote_average}`;
+            voteAverage.classList.add("vote-average");
+
             movieDiv.appendChild(img);
             movieDiv.appendChild(title);
+            movieDiv.appendChild(releaseYear);
+            movieDiv.appendChild(voteAverage);
             movieInfoContent.appendChild(movieDiv);
         }
     });
