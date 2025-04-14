@@ -1,26 +1,114 @@
 // Get the query string into a JSON object
 const queryObj = queryStringToJson(window.location.search);
-const peopleName = queryObj.query;
-
-const idInput = document.getElementById("id-text");
-const findButton = document.getElementById("find-button");
+const peopleName = queryObj.query || ""; // Default to an empty string if no query is provided
+let currentPage = 1; // Track the current page
+let totalPages = 1; // Track the total number of pages
 
 const menuIcon = document.getElementById("menu-icon");
 const navMenu = document.getElementById("nav-menu");
+const personInfoContent = document.getElementById("person-info-content");
+const searchInput = document.getElementById("search-text");
+const searchButton = document.getElementById("search-button");
+const loadMoreDiv = document.createElement("div"); // Container for the "Load More" button
+loadMoreDiv.id = "load-more-div";
+personInfoContent.after(loadMoreDiv);
 
+// Set the search input value based on the query string
+searchInput.value = peopleName;
+
+// Toggle navigation menu
 menuIcon.addEventListener("click", () => {
     navMenu.classList.toggle("show");
 });
 
-// Navigate with a query String
-findButton.addEventListener("click", e => {
-    e.preventDefault();
-    console.log(`${e.target.href}?id=${idInput.value}`);
-    window.location.href = `${e.target.href}?id=${idInput.value}`;
+// Handle search button click
+searchButton.addEventListener("click", () => {
+    const query = searchInput.value.trim();
+    if (!query) {
+        // If the search bar is empty, fetch popular people instead
+        currentPage = 1; // Reset to the first page
+        fetchPopularPeople();
+        return;
+    }
+    window.location.href = `people.html?query=${query}`;
 });
 
-// Make the call to get results from the search
-peopleSearch(peopleName)
-    .then(result => console.log(result))
-    .catch(error => console.log(error));
+// Fetch and display people based on the current page and query
+function fetchPeople(page = 1, append = false) {
+    if (peopleName && peopleName.trim() !== "") {
+        // If a search query is provided, fetch search results
+        peopleSearch(peopleName, page)
+            .then(result => {
+                totalPages = result.total_pages; // Update total pages
+                displayPeople(result.results, append);
+                updateLoadMoreButton();
+            })
+            .catch(error => {
+                console.error("Error fetching people data:", error);
+                personInfoContent.innerHTML = "<p>Failed to load people. Please try again later.</p>";
+            });
+    } else {
+        // If no search query is provided, fetch popular people
+        fetchPopularPeople(page, append);
+    }
+}
+
+// Fetch popular people
+function fetchPopularPeople(page = 1, append = false) {
+    peoplePopular(page)
+        .then(result => {
+            totalPages = result.total_pages; // Update total pages
+            displayPeople(result.results, append);
+            updateLoadMoreButton();
+        })
+        .catch(error => {
+            console.error("Error fetching popular people:", error);
+            personInfoContent.innerHTML = "<p>Failed to load popular people. Please try again later.</p>";
+        });
+}
+
+// Function to display people
+function displayPeople(people, append = false) {
+    if (!append) {
+        personInfoContent.innerHTML = ""; // Clear existing content if not appending
+    }
+    people.forEach(person => {
+        const profilePath = person.profile_path;
+        if (profilePath) {
+            const personDiv = document.createElement("div");
+            personDiv.classList.add("person-item");
+
+            const img = document.createElement("img");
+            img.src = `${imgUrl}w200${profilePath}`;
+            img.alt = person.name;
+            img.classList.add("person-profile");
+
+            const name = document.createElement("h3");
+            name.textContent = person.name;
+
+            personDiv.appendChild(img);
+            personDiv.appendChild(name);
+            personInfoContent.appendChild(personDiv);
+        }
+    });
+}
+
+// Function to update the "Load More" button
+function updateLoadMoreButton() {
+    loadMoreDiv.innerHTML = ""; // Clear existing button
+
+    if (currentPage < totalPages) {
+        const loadMoreButton = document.createElement("button");
+        loadMoreButton.textContent = "Load More";
+        loadMoreButton.classList.add("load-more-button");
+        loadMoreButton.addEventListener("click", () => {
+            currentPage++;
+            fetchPeople(currentPage, true); // Fetch the next page and append results
+        });
+        loadMoreDiv.appendChild(loadMoreButton);
+    }
+}
+
+// Initial fetch
+fetchPeople(currentPage);
 

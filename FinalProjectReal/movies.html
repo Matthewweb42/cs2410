@@ -30,13 +30,26 @@
     </header>
     <main>
         <h1>Movies</h1>
-        <div id="find-div">
+
+        <!-- Search bar for general movie search -->
+        <div id="search-div">
             <div>
-                Find Movie by ID: <input id="id-text" type="text" />
+                <label for="search-text">Search Movies:</label>
+                <input id="search-text" type="text" placeholder="Enter movie name or ID" />
             </div>
             <div id="button-div">
-                <a class="find-button" id="find-button" href="movie.html">Find</a>
+                <button class="search-button" id="search-button">Search</button>
             </div>
+        </div>
+
+        <!-- Movie results container -->
+        <div id="movie-info-content">
+            <!-- Movie results will be dynamically inserted here -->
+        </div>
+
+        <!-- Load More button container -->
+        <div id="load-more-div">
+            <!-- "Load More" button will be dynamically inserted here -->
         </div>
     </main>
 </body>

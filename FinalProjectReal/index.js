@@ -187,8 +187,18 @@ function displayTVShows(tvShows) {
             const title = document.createElement("h3");
             title.textContent = tvShow.name;
 
+            const firstAired = document.createElement("p");
+            firstAired.textContent = `First Aired: ${new Date(tvShow.first_air_date).toLocaleDateString()}`;
+            firstAired.classList.add("first-aired");
+
+            const voteAverage = document.createElement("p");
+            voteAverage.textContent = `Rating: ${tvShow.vote_average.toFixed(1)}`;
+            voteAverage.classList.add("vote-average");
+
             tvDiv.appendChild(img);
             tvDiv.appendChild(title);
+            tvDiv.appendChild(firstAired);
+            tvDiv.appendChild(voteAverage); 
             tvInfoContent.appendChild(tvDiv);
         }
     });
