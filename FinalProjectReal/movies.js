@@ -82,6 +82,7 @@ function displayMovies(movies, append = false) {
             img.src = `${imgUrl}w200${posterPath}`;
             img.alt = movie.title;
             img.classList.add("movie-poster");
+            img.dataset.movieId = movie.id; // Add the movie ID as a data attribute
 
             const title = document.createElement("h3");
             title.textContent = movie.title;
@@ -100,6 +101,22 @@ function displayMovies(movies, append = false) {
             movieDiv.appendChild(voteAverage);
             movieInfoContent.appendChild(movieDiv);
         }
+    });
+
+    // Add click listeners to the posters
+    addPosterClickListeners();
+}
+
+// Function to handle movie poster clicks
+function addPosterClickListeners() {
+    const posters = document.querySelectorAll(".movie-poster"); // Select all movie posters
+    posters.forEach(poster => {
+        poster.addEventListener("click", () => {
+            const movieId = poster.dataset.movieId; // Get the movie ID from the data attribute
+            if (movieId) {
+                window.location.href = `movie.html?id=${movieId}`; // Redirect to the movie details page
+            }
+        });
     });
 }
 
