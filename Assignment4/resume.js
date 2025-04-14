@@ -190,7 +190,6 @@ function createSkillsForm(){
     const section = document.getElementById(`skillsSection`);
     section.innerHTML = `
         <form>
-            <button type="button" class="nested-button1">Delete Last</button>
             <div class="form-group">
                 <label for="skillName">Skill Name:</label>
                 <input type="text" id="skillName" name="skillName" required>
@@ -207,29 +206,28 @@ function createSkillsForm(){
         </form>
     `;
 
-    document.querySelector('.nested-button1').addEventListener('click', function(event) {
-        event.preventDefault();
-        const skillsInfo = document.getElementById('skillsContainer');
-        if (skillsInfo.lastElementChild) {
-            skillsInfo.removeChild(skillsInfo.lastElementChild);
-        }
-    });
     document.querySelector('.nested-button2').addEventListener('click', function(event) {
         event.preventDefault();
-        console.log("Skill Entry");
         const skillName = document.getElementById('skillName').value;
         const skillProficiency = document.getElementById('skillDropDown').value;
 
         const skillsContainer = document.getElementById('skillsContainer');
         const newSkill = document.createElement('div');
-        newSkill.classList.add('info-group');
+        newSkill.classList.add('skill-entry');
         newSkill.innerHTML = `
-            <p>${skillName}</p>
-            <p>${skillProficiency}</p>
+            <div class="info-group">
+                <p id="skillOutput">${skillName}</p>
+                <p id="proficiencyOutput">${skillProficiency}</p>
+            </div>
         `;
         skillsContainer.appendChild(newSkill);
-
     });
 
-    
+    // Add event listeners to existing skill entries
+    const existingSkills = document.querySelectorAll('.skill-entry');
+    existingSkills.forEach(skill => {
+        skill.addEventListener('click', function() {
+            skill.parentElement.removeChild(skill);
+        });
+    });
 }
