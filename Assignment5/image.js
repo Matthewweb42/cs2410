@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toGalleryButton = document.getElementById('toGallery');
     const toHomeButton = document.getElementById('toHome');
     const imageBox = document.getElementById('imageBox');
+    const removeButton = document.getElementById('remove-button');
 
     toGalleryButton.addEventListener('click', () => {
         window.location.href = 'gallery.html';
@@ -30,10 +31,51 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         })
       }
+
       const urlParams = new URLSearchParams(window.location.search);
       const imageUrl = urlParams.get('url');
-      if (imageUrl) {
-          imageBox.setAttribute('src', imageUrl);
-      }
+  
+      fetch('http://localhost:8000/favs.txt')
+          .then(response => response.text())
+          .then(data => {
+              const favorites = data.trim().split('\n').map(line => JSON.parse(line));
+              const favorite = favorites.find(fav => fav.url === imageUrl);
+  
+              if (favorite) {
+                  imageBox.setAttribute('src', favorite.url);
+  
+                  const imageCategory = favorite.category;
+                  if (imageCategory) {
+                      document.getElementById('category').innerText = `Category: ${imageCategory}`;
+                  }
+  
+                  const imageDate = new Date(favorite.date);
+                  console.log(imageDate);
+                  if (imageDate) {
+                      document.getElementById('image-date').innerText = `Date Added: ${imageDate}`;
+                  }
+                  removeButton.addEventListener('click', () => {
+                    const updatedFavorites = favorites.filter(fav => fav.url !== imageUrl);
+                    saveFavorites(updatedFavorites);
+                    window.location.href = 'gallery.html'; 
+                });
+            }
+        });
 
+    function saveFavorites(favorites) {
+        const data = favorites.map(favorite => JSON.stringify(favorite)).join('\n');
+        fetch('http://localhost:8000/api/update-favs', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(response => {
+            if (response.ok) {
+                console.log('Favorites updated successfully');
+            } else {
+                console.error('Failed to update favorites');
+            }
+        });
+    }
 });

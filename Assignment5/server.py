@@ -32,7 +32,11 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
         file_requested = path_without_query.lstrip('/')  # Remove leading slash
 
         if file_requested == '':
+<<<<<<< HEAD
             file_requested = 'index.html'  # Default to index.html if no file is specified
+=======
+            file_requested = 'index.html'
+>>>>>>> 8fcd75933927485ae6f93f747984c6524ce923a7
 
         if os.path.isfile(file_requested):
             self.send_response(200)
