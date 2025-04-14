@@ -11,14 +11,15 @@ filename = "favs.txt"
 
 class HTTPRequestHandler(BaseHTTPRequestHandler):
     def do_PUT(self):
+        print("Received PUT request")
         if re.search('/api/update-favs', self.path):
             length = int(self.headers.get('content-length'))
             data = self.rfile.read(length).decode('utf-8')
+            print("Data received:", data)
 
             # Write the data to the file
-            f = open(filename, "w")
-            f.write(data)
-            f.close()
+            with open(filename, "w") as f:
+                f.write(data)
 
             self.send_response(200)
         else:
@@ -26,11 +27,16 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        print("Received GET request for:", self.path)
         path_without_query = self.path.split('?')[0]
         file_requested = path_without_query.lstrip('/')  # Remove leading slash
 
         if file_requested == '':
+<<<<<<< HEAD
+            file_requested = 'index.html'  # Default to index.html if no file is specified
+=======
             file_requested = 'index.html'
+>>>>>>> 8fcd75933927485ae6f93f747984c6524ce923a7
 
         if os.path.isfile(file_requested):
             self.send_response(200)
@@ -50,12 +56,13 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_response(404, 'Not Found: record does not exist')
             self.end_headers()
 
-
-        
 if __name__ == '__main__':
+    print("Starting server...")
     server = HTTPServer(('localhost', 8000), HTTPRequestHandler)
     try:
+        print("Server started")
         server.serve_forever()
     except KeyboardInterrupt:
         pass
     server.server_close()
+    print("Server stopped")
