@@ -30,17 +30,32 @@
     </header>
     <main>
         <h1>Series Details</h1>
-        <div id="series-div">
-            <div>
-                This will show a poster image. Make sure to read the docs!
-                <a href="https://developer.themoviedb.org/docs/image-basics">Docs</a>
+        <div id="series-details-container">
+            <img id="series-poster" src="" alt="Series Poster" />
+            <div id="series-info">
+                <h2 id="series-title"></h2>
+                <p id="series-years-running"></p>
+                <p id="number-of-seasons"></p>
+                <p id="number-of-episodes"></p>
+                <p id="vote-average"></p>
+                <p id="series-overview"></p>
             </div>
-            <div>
-                Show Series Poster: <input id="url-text" type="text" />
+        </div>
+
+        <!-- Credits Section -->
+        <div id="credits-container">
+            <h2>Credits</h2>
+            <div id="credits-list">
+                <!-- Credits will be dynamically inserted here -->
             </div>
-            <div id="button-div">
-                <button class="image-button" id="image-button">Show Image</button>
+        </div>
+
+        <!-- Scrolling Image Gallery -->
+        <div id="image-gallery-container">
+            <div id="image-gallery">
+                <!-- Images will be dynamically inserted here -->
             </div>
+        </div>
         </div>
         <div id="image-div"></div>
     </main>

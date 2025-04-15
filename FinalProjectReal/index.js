@@ -12,7 +12,7 @@ const personInfoContent = document.getElementById("person-info-content");
 
 const searchMode = document.getElementById("search-mode");
 const searchButton = document.getElementById("search-button");
-//test 
+ 
 // Toggle navigation menu
 menuIcon.addEventListener("click", () => {
     navMenu.classList.toggle("show");
@@ -83,10 +83,7 @@ searchButton.addEventListener("click", () => {
     const query = searchInput.value.trim(); // Get the search term
     const mode = searchMode.value; // Get the selected mode
 
-    if (!query) {
-        alert("Please enter a search term.");
-        return;
-    }
+  
 
     // Perform the search based on the selected mode
     if (mode === "movie") {
@@ -115,10 +112,48 @@ searchEventListeners(movieButton);
 searchEventListeners(tvButton);
 searchEventListeners(personButton);
 
+// Add event listeners to movie, TV, and person tiles
+function addTileClickListeners() {
+    // Add click listeners to movie tiles
+    const movieTiles = document.querySelectorAll(".movie-item");
+    movieTiles.forEach(tile => {
+        tile.addEventListener("click", () => {
+            const movieId = tile.dataset.movieId; // Get the movie ID from the data attribute
+            if (movieId) {
+                window.location.href = `movie.html?id=${movieId}`; // Redirect to the movie details page
+            }
+        });
+    });
+
+    // Add click listeners to TV tiles
+    const tvTiles = document.querySelectorAll(".tv-item");
+    tvTiles.forEach(tile => {
+        tile.addEventListener("click", () => {
+            const tvId = tile.dataset.tvId; // Get the TV ID from the data attribute
+            if (tvId) {
+                window.location.href = `series.html?id=${tvId}`; // Redirect to the TV details page
+            }
+        });
+    });
+
+    // Add click listeners to person tiles
+    const personTiles = document.querySelectorAll(".person-item");
+    personTiles.forEach(tile => {
+        tile.addEventListener("click", () => {
+            const personId = tile.dataset.personId; // Get the person ID from the data attribute
+            if (personId) {
+                window.location.href = `person.html?id=${personId}`; // Redirect to the person details page
+            }
+        });
+    });
+}
+
+
 // Fetch and display popular movies
 moviePopular()
     .then(result => {
         displayMovies(result.results);
+        addTileClickListeners(); // Add click listeners after rendering
     })
     .catch(error => console.log(error));
 
@@ -126,6 +161,7 @@ moviePopular()
 tvPopular()
     .then(result => {
         displayTVShows(result.results);
+        addTileClickListeners(); // Add click listeners after rendering
     })
     .catch(error => console.log(error));
 
@@ -133,6 +169,7 @@ tvPopular()
 peoplePopular()
     .then(result => {
         displayPeople(result.results);
+        addTileClickListeners(); // Add click listeners after rendering
     })
     .catch(error => console.log(error));
 
@@ -144,6 +181,7 @@ function displayMovies(movies) {
         if (posterPath) {
             const movieDiv = document.createElement("div");
             movieDiv.classList.add("movie-item");
+            movieDiv.dataset.movieId = movie.id; // Add the movie ID as a data attribute
 
             const img = document.createElement("img");
             img.src = `${imgUrl}w200${posterPath}`;
@@ -178,6 +216,7 @@ function displayTVShows(tvShows) {
         if (posterPath) {
             const tvDiv = document.createElement("div");
             tvDiv.classList.add("tv-item");
+            tvDiv.dataset.tvId = tvShow.id; // Add the series ID as a data attribute
 
             const img = document.createElement("img");
             img.src = `${imgUrl}w200${posterPath}`;
@@ -198,10 +237,12 @@ function displayTVShows(tvShows) {
             tvDiv.appendChild(img);
             tvDiv.appendChild(title);
             tvDiv.appendChild(firstAired);
-            tvDiv.appendChild(voteAverage); 
+            tvDiv.appendChild(voteAverage);
             tvInfoContent.appendChild(tvDiv);
         }
     });
+
+
 }
 
 // Function to display popular people
@@ -212,6 +253,7 @@ function displayPeople(people) {
         if (profilePath) {
             const personDiv = document.createElement("div");
             personDiv.classList.add("person-item");
+            personDiv.dataset.personId = person.id; // Add the person ID as a data attribute
 
             const img = document.createElement("img");
             img.src = `${imgUrl}w200${profilePath}`;

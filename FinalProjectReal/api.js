@@ -130,6 +130,20 @@ async function tvImages(seriesId) {
     return res1;
 }
 
+async function movieCredits(movieId){
+    const urlExtension = `movie/${movieId}/credits`;
+    const requiredQuery = "language=en-US";
+
+    return await makeAPICall(urlExtension, `${requiredQuery}`);
+}
+
+async function tvCredits(seriesId){
+    const urlExtension = `tv/${seriesId}/credits`;
+    const requiredQuery = "language=en-US";
+
+    return await makeAPICall(urlExtension, `${requiredQuery}`);
+}
+
 // Utility function to process a query string into a JSON object
 function queryStringToJson(queryString) {
     // Remove the leading '?'

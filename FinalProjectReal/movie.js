@@ -69,7 +69,10 @@ function populateImageGallery(images) {
 
 // Function to populate the credits section
 function populateCredits(cast) {
-    cast.forEach(person => {
+
+    const limitedCast = cast.slice(0,20);
+
+    limitedCast.forEach(person => {
         const creditDiv = document.createElement("div");
         creditDiv.classList.add("credit-item");
 
