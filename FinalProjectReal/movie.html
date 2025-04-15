@@ -30,19 +30,31 @@
     </header>
     <main>
         <h1>Movie Details</h1>
-        <div id="movie-div">
-            <div>
-                This will show a backdrop image. Make sure to read the docs!
-                <a href="https://developer.themoviedb.org/docs/image-basics">Docs</a>
-            </div>
-            <div>
-                Show Movie Backdrop: <input id="url-text" type="text" />
-            </div>
-            <div id="button-div">
-                <button class="image-button" id="image-button">Show Image</button>
+        <div id="movie-details-container">
+            <img id="movie-poster" src="" alt="Movie Poster" />
+            <div id="movie-info">
+                <h2 id="movie-title"></h2>
+                <p id="movie-release-date"></p>
+                <p id="movie-runtime"></p>
+                <p id="movie-vote-average"></p>
+                <p id="movie-overview"></p>
             </div>
         </div>
-        <div id="image-div"></div>
+
+        <!-- Credits Section -->
+        <div id="credits-container">
+            <h2>Credits</h2>
+            <div id="credits-list">
+                <!-- Credits will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Scrolling Image Gallery -->
+        <div id="image-gallery-container">
+            <div id="image-gallery">
+                <!-- Images will be dynamically inserted here -->
+            </div>
+        </div>
     </main>
 </body>
 
