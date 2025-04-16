@@ -24,7 +24,7 @@ menuIcon.addEventListener("click", () => {
 // Fetch and display person details
 personDetails(personId)
     .then(person => {
-        profilePicture.src = `${imgUrl}w500${person.profile_path}`;
+        profilePicture.src = `${imgUrl}w300${person.profile_path}`;
         profilePicture.alt = person.name;
         actorName.textContent = person.name;
         actorBirthday.textContent = `Birthday: ${person.birthday || "N/A"}`;
