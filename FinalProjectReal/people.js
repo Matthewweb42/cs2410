@@ -82,6 +82,7 @@ function displayPeople(people, append = false) {
             img.src = `${imgUrl}w200${profilePath}`;
             img.alt = person.name;
             img.classList.add("person-profile");
+            img.dataset.personId= person.id; // Add the person ID as a data attribute
 
             const name = document.createElement("h3");
             name.textContent = person.name;
@@ -91,8 +92,20 @@ function displayPeople(people, append = false) {
             personInfoContent.appendChild(personDiv);
         }
     });
+    addProfileClickListeners(); // Add click listeners to the new profiles
 }
 
+function addProfileClickListeners() {
+    const posters = document.querySelectorAll(".person-profile"); // Select all person profile images
+    posters.forEach(poster => {
+        poster.addEventListener("click", () => {
+            const personId = poster.dataset.personId; // Get the person ID from the data attribute
+            if (personId) {
+                window.location.href = `person.html?id=${personId}`; // Redirect to the person details page
+            }
+        });
+    });
+}
 // Function to update the "Load More" button
 function updateLoadMoreButton() {
     loadMoreDiv.innerHTML = ""; // Clear existing button

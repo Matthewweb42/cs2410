@@ -101,18 +101,6 @@ function populateCredits(cast) {
     });
 }
 
-// Function to add click listeners to series tiles
-// function addSeriesTileClickListeners() {
-//     const seriesTiles = document.querySelectorAll(".tv-item"); // Select all series tiles
-//     seriesTiles.forEach(tile => {
-//         tile.addEventListener("click", () => {
-//             const seriesId = tile.dataset.tvId; // Get the series ID from the data attribute
-//             if (seriesId) {
-//                 window.location.href = `series.html?id=${seriesId}`; // Redirect to the series details page
-//             }
-//         });
-//     });
-// }
 
 // Function to dynamically render series tiles
 function displaySeries(seriesList) {
@@ -136,10 +124,4 @@ function displaySeries(seriesList) {
         seriesDiv.appendChild(title);
         seriesContainer.appendChild(seriesDiv);
     });
-
-    // Add click listeners to the series tiles
-    // addSeriesTileClickListeners();
 }
-
-// Example usage: Call this function after dynamically rendering series tiles
-// addSeriesTileClickListeners();

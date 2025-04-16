@@ -83,8 +83,6 @@ searchButton.addEventListener("click", () => {
     const query = searchInput.value.trim(); // Get the search term
     const mode = searchMode.value; // Get the selected mode
 
-  
-
     // Perform the search based on the selected mode
     if (mode === "movie") {
         window.location.href = `movies.html?query=${query}`;
@@ -93,10 +91,38 @@ searchButton.addEventListener("click", () => {
     } else if (mode === "person") {
         window.location.href = `people.html?query=${query}`;
     } else if (mode === "all") {
-        window.location.href = `search.html?query=${query}`;
+        // Fetch and display results for all categories
+        // Clear existing content
+        movieInfoContent.innerHTML = "";
+        tvInfoContent.innerHTML = "";
+        personInfoContent.innerHTML = "";
+
+        // Fetch and display movies
+        movieSearch(query, 1)
+            .then(result => {
+                displayMovies(result.results);
+                addTileClickListeners(); // Add click listeners after rendering
+
+            })
+            .catch(error => console.error("Error fetching movies:", error));
+
+        // Fetch and display TV shows
+        tvSearch(query, 1)
+            .then(result => {
+                displayTVShows(result.results);
+                addTileClickListeners(); 
+            })
+            .catch(error => console.error("Error fetching TV shows:", error));
+
+        // Fetch and display people
+        peopleSearch(query, 1)
+            .then(result => {
+                displayPeople(result.results);
+                addTileClickListeners(); 
+            })
+            .catch(error => console.error("Error fetching people:", error));
     }
 });
-
 
 // Navigate with a query string
 function searchEventListeners(element) {
