@@ -82,6 +82,7 @@ function displayTVShows(tvShows, append = false) {
             img.src = `${imgUrl}w200${posterPath}`;
             img.alt = tvShow.name;
             img.classList.add("tv-poster");
+            img.dataset.tvId = tvShow.id; // Add the TV show ID as a data attribute
 
             const title = document.createElement("h3");
             title.textContent = tvShow.name;
@@ -100,6 +101,19 @@ function displayTVShows(tvShows, append = false) {
             tvDiv.appendChild(voteAverage);
             tvInfoContent.appendChild(tvDiv);
         }
+    });
+    addPosterClickListeners();
+}
+
+function addPosterClickListeners() {
+    const posters = document.querySelectorAll(".tv-poster"); // Select all TV posters
+    posters.forEach(poster => {
+        poster.addEventListener("click", () => {
+            const tvId = poster.dataset.tvId; // Get the TV ID from the data attribute
+            if (tvId) {
+                window.location.href = `series.html?id=${tvId}`; // Redirect to the TV details page
+            }
+        });
     });
 }
 
