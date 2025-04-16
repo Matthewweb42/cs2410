@@ -144,6 +144,14 @@ async function tvCredits(seriesId){
     return await makeAPICall(urlExtension, `${requiredQuery}`);
 }
 
+// Function to get combined credits for a specific person
+async function personCombinedCredits(personId) {
+    const urlExtension = `person/${personId}/combined_credits`;
+    const requiredQuery = "language=en-US";
+
+    return await makeAPICall(urlExtension, requiredQuery);
+}
+
 // Utility function to process a query string into a JSON object
 function queryStringToJson(queryString) {
     // Remove the leading '?'

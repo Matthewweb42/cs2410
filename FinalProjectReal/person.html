@@ -30,19 +30,24 @@
     </header>
     <main>
         <h1>Person Details</h1>
-        <div id="person-div">
-            <div>
-                This will show a profile image. Make sure to read the docs!
-                <a href="https://developer.themoviedb.org/docs/image-basics">Docs</a>
-            </div>
-            <div>
-                Show Person Profile: <input id="url-text" type="text" />
-            </div>
-            <div id="button-div">
-                <button class="image-button" id="image-button">Show Image</button>
+        <div id="person-details-container">
+            <img id="person-profile" src="" alt="Profile Picture" />
+            <div id="person-info">
+                <h2 id="actor-name"></h2>
+                <p id="actor-birthday"></p>
+                <p id="actor-deathday"></p>
+                <p id="actor-birthplace"></p>
+                <p id="biography"></p>
             </div>
         </div>
-        <div id="image-div"></div>
+
+        <!-- Credit History Section -->
+        <div id="credit-history-container">
+            <h2>Credit History</h2>
+            <div id="credit-history-list">
+                <!-- Combined credits will be dynamically inserted here -->
+            </div>
+        </div>
     </main>
 </body>
 
