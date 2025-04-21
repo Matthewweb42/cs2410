@@ -1,4 +1,4 @@
-    // Get the query string into a JSON object
+
 const queryObj = queryStringToJson(window.location.search);
 const seriesId = queryObj.id;
 
@@ -15,12 +15,12 @@ const seriesOverview = document.getElementById("series-overview");
 const imageGallery = document.getElementById("image-gallery");
 const creditsList = document.getElementById("credits-list");
 
-// Toggle navigation menu
+
 menuIcon.addEventListener("click", () => {
     navMenu.classList.toggle("show");
 });
 
-// Fetch and display series details
+
 tvDetails(seriesId)
     .then(series => {
         seriesPoster.src = `${imgUrl}w500${series.poster_path}`;
@@ -34,44 +34,69 @@ tvDetails(seriesId)
     })
     .catch(error => console.error("Error fetching series details:", error));
 
-// Fetch and display series images for the gallery
+
 tvImages(seriesId)
     .then(result => {
         populateImageGallery(result.posters);
     })
     .catch(error => console.error("Error fetching series images:", error));
 
-// Fetch and display series credits
+
 tvCredits(seriesId)
     .then(credits => {
         populateCredits(credits.cast);
     })
     .catch(error => console.error("Error fetching series credits:", error));
 
-// Function to populate the image gallery
-function populateImageGallery(images) {
-    const galleryWidth = imageGallery.parentElement.offsetWidth;
-    const imageWidth = 200; // Width of a single image
-    const minImagesToFill = Math.ceil(galleryWidth / imageWidth) * 3;
 
-    // Duplicate images to fill the gallery
-    let allImages = images.map(img => `${imgUrl}w200${img.file_path}`);
-    while (allImages.length < minImagesToFill) {
-        allImages = allImages.concat(allImages.slice(0, images.length));
+function populateImageGallery(images) {
+    let currentIndex = 0;
+
+
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.disabled = true; 
+    prevButton.classList.add("gallery-button");
+
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.classList.add("gallery-button");
+
+    const imageElement = document.createElement("img");
+    imageElement.src = `${imgUrl}w500${images[currentIndex].file_path}`;
+    imageElement.alt = "Series Poster";
+    imageElement.classList.add("gallery-image");
+
+
+    prevButton.addEventListener("click", () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateGallery();
+        }
+    });
+
+    nextButton.addEventListener("click", () => {
+        if (currentIndex < images.length - 1) {
+            currentIndex++;
+            updateGallery();
+        }
+    });
+
+    function updateGallery() {
+        imageElement.src = `${imgUrl}w500${images[currentIndex].file_path}`;
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex === images.length - 1;
     }
 
-    // Add images to the gallery
-    allImages.forEach(src => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = "Series Poster";
-        imageGallery.appendChild(img);
-    });
+
+    imageGallery.innerHTML = ""; 
+    imageGallery.appendChild(prevButton);
+    imageGallery.appendChild(imageElement);
+    imageGallery.appendChild(nextButton);
 }
 
-// Function to populate the credits section
 function populateCredits(cast) {
-    const limitedCast = cast.slice(0, 20); // Limit to 20 cast members
+    const limitedCast = cast.slice(0, 20); 
 
     limitedCast.forEach(person => {
         const creditDiv = document.createElement("div");
@@ -80,7 +105,7 @@ function populateCredits(cast) {
         const profileImg = document.createElement("img");
         profileImg.src = person.profile_path
             ? `${imgUrl}w200${person.profile_path}`
-            : "https://via.placeholder.com/200"; // Placeholder if no image
+            : "https://via.placeholder.com/200"; 
         profileImg.alt = person.name;
 
         const name = document.createElement("h3");
@@ -89,7 +114,7 @@ function populateCredits(cast) {
         const character = document.createElement("p");
         character.textContent = `Character: ${person.character}`;
 
-        // Link to the person's page
+
         const link = document.createElement("a");
         link.href = `person.html?id=${person.id}`;
         link.appendChild(profileImg);
@@ -102,15 +127,14 @@ function populateCredits(cast) {
 }
 
 
-// Function to dynamically render series tiles
 function displaySeries(seriesList) {
-    const seriesContainer = document.getElementById("series-container"); // Ensure this container exists in your HTML
-    seriesContainer.innerHTML = ""; // Clear existing content
+    const seriesContainer = document.getElementById("series-container"); 
+    seriesContainer.innerHTML = ""; 
 
     seriesList.forEach(series => {
         const seriesDiv = document.createElement("div");
         seriesDiv.classList.add("tv-item");
-        seriesDiv.dataset.tvId = series.id; // Add the series ID as a data attribute
+        seriesDiv.dataset.tvId = series.id; 
 
         const img = document.createElement("img");
         img.src = `${imgUrl}w200${series.poster_path}`;

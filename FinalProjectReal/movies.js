@@ -67,10 +67,10 @@ function fetchPopularMovies(page = 1, append = false) {
         });
 }
 
-// Function to display movies
+
 function displayMovies(movies, append = false) {
     if (!append) {
-        movieInfoContent.innerHTML = ""; // Clear existing content if not appending
+        movieInfoContent.innerHTML = ""; 
     }
     movies.forEach(movie => {
         const posterPath = movie.poster_path;
@@ -82,7 +82,7 @@ function displayMovies(movies, append = false) {
             img.src = `${imgUrl}w200${posterPath}`;
             img.alt = movie.title;
             img.classList.add("movie-poster");
-            img.dataset.movieId = movie.id; // Add the movie ID as a data attribute
+            img.dataset.movieId = movie.id; 
 
             const title = document.createElement("h3");
             title.textContent = movie.title;
@@ -103,26 +103,26 @@ function displayMovies(movies, append = false) {
         }
     });
 
-    // Add click listeners to the posters
+   
     addPosterClickListeners();
 }
 
-// Function to handle movie poster clicks
+
 function addPosterClickListeners() {
-    const posters = document.querySelectorAll(".movie-poster"); // Select all movie posters
+    const posters = document.querySelectorAll(".movie-poster"); 
     posters.forEach(poster => {
         poster.addEventListener("click", () => {
-            const movieId = poster.dataset.movieId; // Get the movie ID from the data attribute
+            const movieId = poster.dataset.movieId;
             if (movieId) {
-                window.location.href = `movie.html?id=${movieId}`; // Redirect to the movie details page
+                window.location.href = `movie.html?id=${movieId}`;
             }
         });
     });
 }
 
-// Function to update the "Load More" button
+
 function updateLoadMoreButton() {
-    loadMoreDiv.innerHTML = ""; // Clear existing button
+    loadMoreDiv.innerHTML = "";
 
     if (currentPage < totalPages) {
         const loadMoreButton = document.createElement("button");
@@ -130,11 +130,11 @@ function updateLoadMoreButton() {
         loadMoreButton.classList.add("load-more-button");
         loadMoreButton.addEventListener("click", () => {
             currentPage++;
-            fetchMovies(currentPage, true); // Fetch the next page and append results
+            fetchMovies(currentPage, true); 
         });
         loadMoreDiv.appendChild(loadMoreButton);
     }
 }
 
-// Initial fetch
+
 fetchMovies(currentPage);

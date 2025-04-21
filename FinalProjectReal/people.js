@@ -1,45 +1,45 @@
-// Get the query string into a JSON object
+
 const queryObj = queryStringToJson(window.location.search);
-const peopleName = queryObj.query || ""; // Default to an empty string if no query is provided
-let currentPage = 1; // Track the current page
-let totalPages = 1; // Track the total number of pages
+const peopleName = queryObj.query || ""; 
+let currentPage = 1;
+let totalPages = 1; 
 
 const menuIcon = document.getElementById("menu-icon");
 const navMenu = document.getElementById("nav-menu");
 const personInfoContent = document.getElementById("person-info-content");
 const searchInput = document.getElementById("search-text");
 const searchButton = document.getElementById("search-button");
-const loadMoreDiv = document.createElement("div"); // Container for the "Load More" button
+const loadMoreDiv = document.createElement("div"); 
 loadMoreDiv.id = "load-more-div";
 personInfoContent.after(loadMoreDiv);
 
-// Set the search input value based on the query string
+
 searchInput.value = peopleName;
 
-// Toggle navigation menu
+
 menuIcon.addEventListener("click", () => {
     navMenu.classList.toggle("show");
 });
 
-// Handle search button click
+
 searchButton.addEventListener("click", () => {
     const query = searchInput.value.trim();
     if (!query) {
-        // If the search bar is empty, fetch popular people instead
-        currentPage = 1; // Reset to the first page
+
+        currentPage = 1; 
         fetchPopularPeople();
         return;
     }
     window.location.href = `people.html?query=${query}`;
 });
 
-// Fetch and display people based on the current page and query
+
 function fetchPeople(page = 1, append = false) {
     if (peopleName && peopleName.trim() !== "") {
-        // If a search query is provided, fetch search results
+       
         peopleSearch(peopleName, page)
             .then(result => {
-                totalPages = result.total_pages; // Update total pages
+                totalPages = result.total_pages;
                 displayPeople(result.results, append);
                 updateLoadMoreButton();
             })
@@ -48,16 +48,15 @@ function fetchPeople(page = 1, append = false) {
                 personInfoContent.innerHTML = "<p>Failed to load people. Please try again later.</p>";
             });
     } else {
-        // If no search query is provided, fetch popular people
+   
         fetchPopularPeople(page, append);
     }
 }
 
-// Fetch popular people
 function fetchPopularPeople(page = 1, append = false) {
     peoplePopular(page)
         .then(result => {
-            totalPages = result.total_pages; // Update total pages
+            totalPages = result.total_pages; 
             displayPeople(result.results, append);
             updateLoadMoreButton();
         })
@@ -67,10 +66,10 @@ function fetchPopularPeople(page = 1, append = false) {
         });
 }
 
-// Function to display people
+
 function displayPeople(people, append = false) {
     if (!append) {
-        personInfoContent.innerHTML = ""; // Clear existing content if not appending
+        personInfoContent.innerHTML = ""; 
     }
     people.forEach(person => {
         const profilePath = person.profile_path;
@@ -82,7 +81,7 @@ function displayPeople(people, append = false) {
             img.src = `${imgUrl}w200${profilePath}`;
             img.alt = person.name;
             img.classList.add("person-profile");
-            img.dataset.personId= person.id; // Add the person ID as a data attribute
+            img.dataset.personId= person.id; 
 
             const name = document.createElement("h3");
             name.textContent = person.name;
@@ -92,23 +91,23 @@ function displayPeople(people, append = false) {
             personInfoContent.appendChild(personDiv);
         }
     });
-    addProfileClickListeners(); // Add click listeners to the new profiles
+    addProfileClickListeners(); 
 }
 
 function addProfileClickListeners() {
-    const posters = document.querySelectorAll(".person-profile"); // Select all person profile images
+    const posters = document.querySelectorAll(".person-profile"); 
     posters.forEach(poster => {
         poster.addEventListener("click", () => {
-            const personId = poster.dataset.personId; // Get the person ID from the data attribute
+            const personId = poster.dataset.personId;
             if (personId) {
-                window.location.href = `person.html?id=${personId}`; // Redirect to the person details page
+                window.location.href = `person.html?id=${personId}`; 
             }
         });
     });
 }
-// Function to update the "Load More" button
+
 function updateLoadMoreButton() {
-    loadMoreDiv.innerHTML = ""; // Clear existing button
+    loadMoreDiv.innerHTML = ""; 
 
     if (currentPage < totalPages) {
         const loadMoreButton = document.createElement("button");
@@ -116,12 +115,11 @@ function updateLoadMoreButton() {
         loadMoreButton.classList.add("load-more-button");
         loadMoreButton.addEventListener("click", () => {
             currentPage++;
-            fetchPeople(currentPage, true); // Fetch the next page and append results
+            fetchPeople(currentPage, true);
         });
         loadMoreDiv.appendChild(loadMoreButton);
     }
 }
 
-// Initial fetch
 fetchPeople(currentPage);
 

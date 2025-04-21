@@ -1,4 +1,4 @@
-// Get the query string into a JSON object
+
 const queryObj = queryStringToJson(window.location.search);
 const personId = queryObj.id;
 
@@ -16,12 +16,12 @@ const actorBirthplace = document.getElementById("actor-birthplace");
 const biography = document.getElementById("biography");
 const creditsList = document.getElementById("credits-list");
 
-// Toggle navigation menu
+
 menuIcon.addEventListener("click", () => {
     navMenu.classList.toggle("show");
 });
 
-// Fetch and display person details
+
 personDetails(personId)
     .then(person => {
         profilePicture.src = `${imgUrl}w300${person.profile_path}`;
@@ -34,51 +34,23 @@ personDetails(personId)
     })
     .catch(error => console.error("Error fetching person details:", error));
 
-// Fetch and display person images
-// personImages(personId)
-//     .then(result => {
-//         populateImageGallery(result.profiles);
-//     })
-//     .catch(error => console.error("Error fetching person images:", error));
 
-// Fetch and display person credits
-// personCredits(personId)
-//     .then(credits => {
-//         populateCredits(credits.cast);
-//     })
-//     .catch(error => console.error("Error fetching person credits:", error));
-
-// Fetch and display combined credits
 personCombinedCredits(personId)
     .then(credits => {
         populateCreditHistory(credits.cast);
     })
     .catch(error => console.error("Error fetching combined credits:", error));
 
-// Function to populate the image gallery
-// function populateImageGallery(images) {
-//     const imageDiv = document.getElementById("image-div");
-//     imageDiv.innerHTML = ""; // Clear existing images
 
-//     images.forEach(image => {
-//         const img = document.createElement("img");
-//         img.src = `${imgUrl}w200${image.file_path}`;
-//         img.alt = "Person Image";
-//         img.classList.add("person-image");
-//         imageDiv.appendChild(img);
-//     });
-// }
-
-// Function to populate the credits section
 function populateCredits(cast) {
-    const limitedCast = cast.slice(0, 20); // Limit to 20 credits
+    const limitedCast = cast.slice(0, 20); 
 
     limitedCast.forEach(role => {
         const creditDiv = document.createElement("div");
         creditDiv.classList.add("credit-item");
 
         const title = document.createElement("h3");
-        title.textContent = role.title || role.name; // Use title for movies, name for TV shows
+        title.textContent = role.title || role.name; 
 
         const character = document.createElement("p");
         character.textContent = `Character: ${role.character || "N/A"}`;
@@ -90,11 +62,11 @@ function populateCredits(cast) {
 }
 
 
-// Function to populate the credit history section
+
 function populateCreditHistory(credits) {
     const creditHistoryList = document.getElementById("credit-history-list");
 
-    // Filter out non-movie and non-TV credits
+
     const filteredCredits = credits.filter(
         credit => credit.media_type === "movie" || credit.media_type === "tv"
     );
@@ -106,11 +78,11 @@ function populateCreditHistory(credits) {
         const posterImg = document.createElement("img");
         posterImg.src = credit.poster_path
             ? `${imgUrl}w200${credit.poster_path}`
-            : "https://via.placeholder.com/200"; // Placeholder if no image
+            : "https://via.placeholder.com/200"; 
         posterImg.alt = credit.title || credit.name;
 
         const title = document.createElement("h3");
-        title.textContent = credit.title || credit.name; // Use title for movies, name for TV shows
+        title.textContent = credit.title || credit.name;
 
         const releaseDate = document.createElement("p");
         releaseDate.textContent = `Release Date: ${
@@ -120,7 +92,7 @@ function populateCreditHistory(credits) {
         const character = document.createElement("p");
         character.textContent = `Character: ${credit.character || "N/A"}`;
 
-        // Link to the movie or TV page
+
         const link = document.createElement("a");
         link.href =
             credit.media_type === "movie"

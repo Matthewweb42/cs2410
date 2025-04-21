@@ -13,25 +13,23 @@ const personInfoContent = document.getElementById("person-info-content");
 const searchMode = document.getElementById("search-mode");
 const searchButton = document.getElementById("search-button");
  
-// Toggle navigation menu
 menuIcon.addEventListener("click", () => {
     navMenu.classList.toggle("show");
 });
 
-// Add event listener to the search mode dropdown
 searchMode.addEventListener("change", () => {
     const mode = searchMode.value;
     filterContentByMode(mode);
 });
 
-// Function to filter content based on the selected mode
+
 function filterContentByMode(mode) {
-    // Hide all sections initially
+
     movieInfoContent.parentElement.style.display = "none";
     tvInfoContent.parentElement.style.display = "none";
     personInfoContent.parentElement.style.display = "none";
 
-    // Show the relevant section based on the selected mode
+ 
     if (mode === "movie") {
         movieInfoContent.parentElement.style.display = "block";
     } else if (mode === "tv") {
@@ -45,12 +43,11 @@ function filterContentByMode(mode) {
     }
 }
 
-// Add event listener to the search button
 searchButton.addEventListener("change", () => {
-    const query = searchInput.value.trim(); // Get the search term
-    const mode = searchMode.value; // Get the selected mode
+    const query = searchInput.value.trim(); 
+    const mode = searchMode.value;
 
-    // Perform the search based on the selected mode
+   
     if (mode === "movie") {
         window.location.href="movies.html";
     } else if (mode === "tv") {
@@ -62,11 +59,11 @@ searchButton.addEventListener("change", () => {
     }
 });
 
-// Add event listener to the search mode dropdown
+
 searchMode.addEventListener("change", () => {
     const mode = searchMode.value;
 
-    // Navigate to the respective page based on the selected mode
+
     if (mode === "movie") {
         window.location.href = "movies.html";
     } else if (mode === "tv") {
@@ -74,16 +71,16 @@ searchMode.addEventListener("change", () => {
     } else if (mode === "person") {
         window.location.href = "people.html";
     } else if (mode === "all") {
-        window.location.href = "index.html"; // Redirect to the home page for "All"
+        window.location.href = "index.html";
     }
 });
 
-// Add event listener to the search button
-searchButton.addEventListener("click", () => {
-    const query = searchInput.value.trim(); // Get the search term
-    const mode = searchMode.value; // Get the selected mode
 
-    // Perform the search based on the selected mode
+searchButton.addEventListener("click", () => {
+    const query = searchInput.value.trim(); 
+    const mode = searchMode.value; 
+
+    
     if (mode === "movie") {
         window.location.href = `movies.html?query=${query}`;
     } else if (mode === "tv") {
@@ -91,22 +88,22 @@ searchButton.addEventListener("click", () => {
     } else if (mode === "person") {
         window.location.href = `people.html?query=${query}`;
     } else if (mode === "all") {
-        // Fetch and display results for all categories
-        // Clear existing content
+     s
+ 
         movieInfoContent.innerHTML = "";
         tvInfoContent.innerHTML = "";
         personInfoContent.innerHTML = "";
 
-        // Fetch and display movies
+
         movieSearch(query, 1)
             .then(result => {
                 displayMovies(result.results);
-                addTileClickListeners(); // Add click listeners after rendering
+                addTileClickListeners(); 
 
             })
             .catch(error => console.error("Error fetching movies:", error));
 
-        // Fetch and display TV shows
+ 
         tvSearch(query, 1)
             .then(result => {
                 displayTVShows(result.results);
@@ -114,7 +111,7 @@ searchButton.addEventListener("click", () => {
             })
             .catch(error => console.error("Error fetching TV shows:", error));
 
-        // Fetch and display people
+ 
         peopleSearch(query, 1)
             .then(result => {
                 displayPeople(result.results);
@@ -124,7 +121,6 @@ searchButton.addEventListener("click", () => {
     }
 });
 
-// Navigate with a query string
 function searchEventListeners(element) {
     element.addEventListener("click", e => {
         console.log(searchInput.value);
@@ -133,81 +129,80 @@ function searchEventListeners(element) {
     });
 }
 
-// Add the listener to each anchor button
 searchEventListeners(movieButton);
 searchEventListeners(tvButton);
 searchEventListeners(personButton);
 
-// Add event listeners to movie, TV, and person tiles
+
 function addTileClickListeners() {
-    // Add click listeners to movie tiles
+ 
     const movieTiles = document.querySelectorAll(".movie-item");
     movieTiles.forEach(tile => {
         tile.addEventListener("click", () => {
-            const movieId = tile.dataset.movieId; // Get the movie ID from the data attribute
+            const movieId = tile.dataset.movieId; 
             if (movieId) {
-                window.location.href = `movie.html?id=${movieId}`; // Redirect to the movie details page
+                window.location.href = `movie.html?id=${movieId}`; 
             }
         });
     });
 
-    // Add click listeners to TV tiles
+  
     const tvTiles = document.querySelectorAll(".tv-item");
     tvTiles.forEach(tile => {
         tile.addEventListener("click", () => {
-            const tvId = tile.dataset.tvId; // Get the TV ID from the data attribute
+            const tvId = tile.dataset.tvId; 
             if (tvId) {
-                window.location.href = `series.html?id=${tvId}`; // Redirect to the TV details page
+                window.location.href = `series.html?id=${tvId}`; 
             }
         });
     });
 
-    // Add click listeners to person tiles
+
     const personTiles = document.querySelectorAll(".person-item");
     personTiles.forEach(tile => {
         tile.addEventListener("click", () => {
-            const personId = tile.dataset.personId; // Get the person ID from the data attribute
+            const personId = tile.dataset.personId; 
             if (personId) {
-                window.location.href = `person.html?id=${personId}`; // Redirect to the person details page
+                window.location.href = `person.html?id=${personId}`; 
             }
         });
     });
 }
 
 
-// Fetch and display popular movies
+
 moviePopular()
     .then(result => {
         displayMovies(result.results);
-        addTileClickListeners(); // Add click listeners after rendering
+        addTileClickListeners(); 
     })
     .catch(error => console.log(error));
 
-// Fetch and display popular TV shows
+
 tvPopular()
     .then(result => {
         displayTVShows(result.results);
-        addTileClickListeners(); // Add click listeners after rendering
+        addTileClickListeners();
     })
     .catch(error => console.log(error));
 
-// Fetch and display popular people
+
 peoplePopular()
     .then(result => {
         displayPeople(result.results);
-        addTileClickListeners(); // Add click listeners after rendering
+        addTileClickListeners(); 
     })
     .catch(error => console.log(error));
 
-// Function to display popular movies
+
 function displayMovies(movies) {
-    movieInfoContent.innerHTML = ""; // Clear existing content
+    movieInfoContent.innerHTML = "";
     movies.forEach(movie => {
         const posterPath = movie.poster_path;
         if (posterPath) {
             const movieDiv = document.createElement("div");
             movieDiv.classList.add("movie-item");
-            movieDiv.dataset.movieId = movie.id; // Add the movie ID as a data attribute
+            movieDiv.dataset.movieId = movie.id; 
 
             const img = document.createElement("img");
             img.src = `${imgUrl}w200${posterPath}`;
@@ -234,15 +229,15 @@ function displayMovies(movies) {
     });
 }
 
-// Function to display popular TV shows
+
 function displayTVShows(tvShows) {
-    tvInfoContent.innerHTML = ""; // Clear existing content
+    tvInfoContent.innerHTML = ""; 
     tvShows.forEach(tvShow => {
         const posterPath = tvShow.poster_path;
         if (posterPath) {
             const tvDiv = document.createElement("div");
             tvDiv.classList.add("tv-item");
-            tvDiv.dataset.tvId = tvShow.id; // Add the series ID as a data attribute
+            tvDiv.dataset.tvId = tvShow.id; 
 
             const img = document.createElement("img");
             img.src = `${imgUrl}w200${posterPath}`;
@@ -271,15 +266,14 @@ function displayTVShows(tvShows) {
 
 }
 
-// Function to display popular people
 function displayPeople(people) {
-    personInfoContent.innerHTML = ""; // Clear existing content
+    personInfoContent.innerHTML = ""; 
     people.forEach(person => {
         const profilePath = person.profile_path;
         if (profilePath) {
             const personDiv = document.createElement("div");
             personDiv.classList.add("person-item");
-            personDiv.dataset.personId = person.id; // Add the person ID as a data attribute
+            personDiv.dataset.personId = person.id; 
 
             const img = document.createElement("img");
             img.src = `${imgUrl}w200${profilePath}`;
